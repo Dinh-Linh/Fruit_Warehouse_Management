@@ -1,0 +1,16 @@
+.menu{
+    -fx-text-fill: white;
+    -fx-pref-heigh:50px;
+    -fx-pref-width: 170px;
+
+}
+.menu:hover{
+    -fx-background-color:#90ee90;
+}
+.thanhmenu{
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #449D6B 0%, #633364 100%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 4, 0, 0, 4);
+}
+.ngancach{
+    -fx-stroke: white;
+}

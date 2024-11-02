@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="550.0" prefWidth="886.0" style="-fx-border-color: grey;" stylesheets="@styleTaoDonMoi.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller">
+   <children>
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="176.0" style="-fx-border-color: grey;" styleClass="thanhmenu">
+         <children>
+            <Label fx:id="labelTrangChu" layoutX="3.0" layoutY="197.0" prefHeight="42.0" prefWidth="178.0" styleClass="menu" text="           Trang chủ" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Line endX="-2.33331298828125" endY="0.414215087890625" layoutX="179.0" layoutY="190.0" startX="-179.0" startY="0.414215087890625" stroke="#363030" style="-fx-stroke: grey;" styleClass="ngancach" />
+            <Label fx:id="labelNhapHang" layoutX="3.0" layoutY="239.0" prefHeight="42.0" prefWidth="166.0" styleClass="menu" text="           Nhập hàng " textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="3.0" layoutY="281.0" prefHeight="42.0" prefWidth="166.0" styleClass="menu" text="           Xuất hàng" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="3.0" layoutY="323.0" prefHeight="42.0" prefWidth="166.0" styleClass="menu" text="           Kho hàng" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="3.0" layoutY="365.0" prefHeight="42.0" prefWidth="166.0" styleClass="menu" text="           Nhân viên " textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Circle layoutX="88.0" layoutY="90.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="74.0" layoutY="81.0" text="Logo" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label contentDisplay="CENTER" layoutX="5.0" layoutY="147.0" prefHeight="35.0" prefWidth="166.0" text="        CTY Fruit" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Bold" size="18.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane id="trangchu" layoutX="191.0" layoutY="19.0" prefHeight="518.0" prefWidth="680.0" style="-fx-border-radius: 10; -fx-border-color: grey;">
+         <children>
+            <AnchorPane layoutX="13.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="110.0" style="-fx-border-radius: 0 10 10 0; -fx-border-color: #918E8E;" styleClass="label-tittle">
+               <children>
+                  <Label layoutX="-1.0" layoutY="3.0" prefHeight="27.0" prefWidth="78.0" text="    Tạo đơn ">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <AnchorPane layoutX="82.0" prefHeight="31.0" prefWidth="30.0" style="-fx-border-radius: 0 10 10 0;" styleClass="label-color" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="13.0" layoutY="59.0" minWidth="-Infinity" prefHeight="446.0" prefWidth="292.0" style="-fx-border-color: grey; -fx-border-radius: 10px 10px 0 0;">
+               <children>
+                  <AnchorPane prefHeight="27.0" prefWidth="292.0" styleClass="label-nhap">
+                     <children>
+                        <Label layoutX="69.0" layoutY="4.0" text="Nhập thông tin trái cây" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                     </children>
+                  </AnchorPane>
+                  <Label layoutX="14.0" layoutY="38.0" text="Mã TC  :">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="64.0" layoutY="39.0" text="None" />
+                  <Label layoutX="208.0" layoutY="39.0" text="None" />
+                  <Label layoutX="132.0" layoutY="39.0" text="Đơn vị tính :">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="124.0" prefHeight="18.0" prefWidth="84.0" text="Xuất xứ       :">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="361.0" text="Giá xuất      :">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="311.0" text="Giá nhập     :">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="266.0" text="Size              : ">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="214.0" text="Số lượng     :">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="165.0" text="Tình trạng   :">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="75.0" text="Tên trái cây :">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="98.0" layoutY="71.0" prefHeight="26.0" prefWidth="188.0" />
+                  <TextField layoutX="98.0" layoutY="356.0" prefHeight="26.0" prefWidth="188.0" />
+                  <TextField layoutX="98.0" layoutY="306.0" prefHeight="26.0" prefWidth="188.0" />
+                  <TextField layoutX="98.0" layoutY="261.0" prefHeight="26.0" prefWidth="188.0" />
+                  <TextField layoutX="98.0" layoutY="210.0" prefHeight="26.0" prefWidth="188.0" />
+                  <TextField layoutX="98.0" layoutY="160.0" prefHeight="26.0" prefWidth="188.0" />
+                  <TextField layoutX="98.0" layoutY="120.0" prefHeight="26.0" prefWidth="188.0" />
+                  <Button layoutX="80.0" layoutY="398.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="141.0" styleClass="taomoibox" text="Lưu vào đơn nhập" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Button>
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="315.0" layoutY="59.0" minWidth="-Infinity" prefHeight="446.0" prefWidth="357.0" style="-fx-border-color: grey; -fx-border-radius: 10px 10px 0 0;">
+               <children>
+                  <AnchorPane layoutX="1.0" prefHeight="27.0" prefWidth="356.0" style="-fx-border-color: grey; -fx-border-radius: 10px 10px 0 0;" styleClass="label-nhap">
+                     <children>
+                        <Label layoutX="146.0" layoutY="4.0" text="Đơn nhập" textFill="WHITE">
+                           <font>
+                              <Font name="System Bold" size="14.0" />
+                           </font></Label>
+                     </children>
+                  </AnchorPane>
+                  <Label layoutX="14.0" layoutY="40.0" text="ID :">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="40.0" layoutY="40.0" text="None" />
+                  <Label layoutX="190.0" layoutY="40.0" text="Ngày nhập :">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="265.0" layoutY="40.0" text="None" />
+                  <TableView layoutX="14.0" layoutY="72.0" prefHeight="200.0" prefWidth="329.0">
+                    <columns>
+                      <TableColumn prefWidth="29.60003662109375" text="STT" />
+                      <TableColumn prefWidth="64.79998779296875" text="Mã TC" />
+                        <TableColumn prefWidth="94.39996337890625" text="Tên trái cây" />
+                        <TableColumn prefWidth="37.60009765625" text="Size" />
+                        <TableColumn prefWidth="102.39990234375" text="Tình trạng" />
+                    </columns>
+                  </TableView>
+                  <Label layoutX="14.0" layoutY="294.0" text="Thành tiền      :">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="14.0" layoutY="334.0" text="Nhà cung cấp :">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="105.0" layoutY="294.0" text="None" />
+                  <TextField layoutX="105.0" layoutY="329.0" prefHeight="26.0" prefWidth="238.0" />
+                  <Button layoutX="119.0" layoutY="395.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="141.0" styleClass="taomoibox" text="Tạo đơn" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font></Button>
+               </children>
+            </AnchorPane>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>
