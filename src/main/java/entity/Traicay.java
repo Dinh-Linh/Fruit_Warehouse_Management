@@ -45,8 +45,12 @@ public class Traicay implements Serializable {
 
 
     @Basic
-    @Column(name = "GiaBan")
-    private BigDecimal giaBan;
+    @Column(name = "GiaNhap")
+    private BigDecimal giaNhap;
+
+    @Basic
+    @Column(name = "GiaXuat")
+    private BigDecimal giaXuat;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "traiCay_DonNhapHang", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
