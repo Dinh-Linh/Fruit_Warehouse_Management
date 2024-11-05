@@ -26,8 +26,10 @@ public class HelloApplication extends Application {
         Scene scene = new Scene(root, 835, 548);
         Scene donNhapScene = new Scene(donNhapRoot);
         stage.setScene(donNhapScene);
+
         Scene taoDonMoiScene = new Scene(taoDonMoiRoot);
         stage.setScene(taoDonMoiScene);
+
         scene.getStylesheets().add(getClass().getResource("styleTrangChu.css").toExternalForm());
         stage.setTitle("Quản lý kho hàng trái cây");
         stage.setScene(scene);
