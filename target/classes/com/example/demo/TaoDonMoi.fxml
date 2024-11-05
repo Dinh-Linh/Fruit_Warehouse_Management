@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.shape.Circle?>
-<?import javafx.scene.shape.Line?>
-<?import javafx.scene.text.Font?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="550.0" prefWidth="886.0" style="-fx-border-color: grey;" stylesheets="@styleTaoDonMoi.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller">
+<AnchorPane prefHeight="550.0" prefWidth="886.0" style="-fx-border-color: grey;" stylesheets="@styleTaoDonMoi.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.Controller">
    <children>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="176.0" style="-fx-border-color: grey;" styleClass="thanhmenu">
          <children>
@@ -76,8 +70,7 @@
                            </font></Label>
                      </children>
                   </AnchorPane>
-                  <Label layoutX="257.0" layoutY="42.0" text="None" />
-                  <Label layoutX="181.0" layoutY="42.0" text="Đơn vị tính :">
+                  <Label layoutX="164.0" layoutY="42.0" text="Đơn vị tính :">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
@@ -117,23 +110,24 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="98.0" layoutY="356.0" prefHeight="26.0" prefWidth="188.0" />
-                  <TextField layoutX="98.0" layoutY="306.0" prefHeight="26.0" prefWidth="188.0" />
-                  <TextField layoutX="98.0" layoutY="210.0" prefHeight="26.0" prefWidth="188.0" />
-                  <TextField layoutX="99.0" layoutY="123.0" prefHeight="26.0" prefWidth="188.0" />
-                  <Button layoutX="80.0" layoutY="398.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="141.0" styleClass="taomoibox" text="Lưu vào đơn nhập" textFill="WHITE">
+                  <TextField fx:id="fruitPriceExport" layoutX="98.0" layoutY="356.0" prefHeight="26.0" prefWidth="188.0" />
+                  <TextField fx:id="fruitPriceImport" layoutX="98.0" layoutY="306.0" prefHeight="26.0" prefWidth="188.0" />
+                  <TextField fx:id="fruitQuantity" layoutX="98.0" layoutY="210.0" prefHeight="26.0" prefWidth="188.0" />
+                  <TextField fx:id="fruitOrigin" layoutX="99.0" layoutY="123.0" prefHeight="26.0" prefWidth="188.0" />
+                  <Button fx:id="btnSave" layoutX="80.0" layoutY="398.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="141.0" styleClass="taomoibox" text="Lưu vào đơn nhập" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font></Button>
-                  <ComboBox layoutX="98.0" layoutY="38.0" prefHeight="26.0" prefWidth="76.0" />
-                  <ComboBox layoutX="98.0" layoutY="261.0" prefHeight="26.0" prefWidth="188.0" />
-                  <ComboBox layoutX="99.0" layoutY="166.0" prefHeight="26.0" prefWidth="188.0" />
+                  <ComboBox fx:id="comboBoxFruitType" layoutX="98.0" layoutY="38.0" prefHeight="26.0" prefWidth="52.0" />
+                  <ComboBox fx:id="comboBoxSize" layoutX="98.0" layoutY="261.0" prefHeight="26.0" prefWidth="188.0" />
+                  <ComboBox fx:id="comboBoxTinhTrang" layoutX="99.0" layoutY="166.0" prefHeight="26.0" prefWidth="188.0" />
                   <Label layoutX="14.0" layoutY="43.0" text="Loại trái cây :">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <TextField layoutX="99.0" layoutY="78.0" prefHeight="26.0" prefWidth="188.0" />
+                  <TextField fx:id="fruitName" layoutX="99.0" layoutY="78.0" prefHeight="26.0" prefWidth="188.0" />
+                  <TextField fx:id="fruitDVT" layoutX="239.0" layoutY="38.0" prefHeight="25.0" prefWidth="44.0" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="315.0" layoutY="59.0" minWidth="-Infinity" prefHeight="446.0" prefWidth="357.0" style="-fx-border-color: grey; -fx-border-radius: 10px 10px 0 0;">
