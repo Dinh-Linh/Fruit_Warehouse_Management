@@ -1,13 +1,10 @@
 package com.example.demo;
 
+import com.example.demo.entity.TraiCay;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.stage.Stage;
-
-import java.io.IOException;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 public class TaoMoiDonController {
     @FXML
@@ -36,37 +33,83 @@ public class TaoMoiDonController {
     private TextField fruitPriceExport;
     @FXML
     private TextField fruitDVT;
+    @FXML
+    private TextField supplier;
+
+    //Danh sách cột trong bảng
+    @FXML
+    private TableColumn soTT;
+    @FXML
+    private TableColumn clMaTc;
+    @FXML
+    private TableColumn clTenTc;
+    @FXML
+    private TableColumn clKichThuocTc;
+    @FXML
+    private TableColumn clTinhTrangTc;
 
     @FXML
-    private TextField labelNgayNhap;
+    private void initialize() {
 
-    @FXML
-    private void initialize(){
+        //Set default value for ComboBox
+        comboBoxSize.setValue("S");
+        comboBoxFruitType.setValue("Loại 1");
+        comboBoxTinhTrang.setValue("Chín");
+
+        //Set value Fruit Field for ComboBox
+        comboBoxSize.getItems().addAll("S", "M", "L", "XL", "XXL");
+        comboBoxFruitType.getItems().addAll("Loại 1", "Loại 2", "Loại 3");
+        comboBoxTinhTrang.getItems().addAll("Chín", "Chưa chín", "Sắp chín");
+
         if (btnTaoDon != null) {
             btnTaoDon.setOnAction(event -> {
-                if (tableDonNhap != null && !tableDonNhap.getItems().isEmpty()) {
+                if (supplier.getText().isBlank() && !tableDonNhap.getItems().isEmpty()) {
+                    showAlert("Thông báo", "Vui lòng chọn nhà cung cấp");
+                }
+                else if(tableDonNhap.getItems().isEmpty() && !supplier.getText().isBlank()){
+                    showAlert("Thông báo", "Chưa co trái cây được chọn");
+                }
+                else if(supplier.getText().isBlank() && tableDonNhap.getItems().isEmpty()){
+                    showAlert("Thông báo", "Nhập đầy đủ thông tin");
+                }
+                else {
                     showAlert("Tạo đơn thành công", "Đơn đã được tạo thành công.");
-                } else {
-                    showAlert("Thông báo", "Nhập dữ liệu vào bảng.");
                 }
             });
         } else {
             System.out.println("btnTaoDon is still null.");
         }
 
-        if (comboBoxSize != null) {
-            //Set default value
-            comboBoxSize.setValue("S");
-            comboBoxFruitType.setValue("Loại 1");
-            comboBoxTinhTrang.setValue("Chín");
-            comboBoxSize.getItems().addAll("S", "M", "L", "XL", "XXL");
-            comboBoxFruitType.getItems().addAll("Loại 1", "Loại 2", "Loại 3");
-            comboBoxTinhTrang.getItems().addAll("Chín", "Chưa chín", "Sắp chín");
+        clMaTc.setCellValueFactory(new PropertyValueFactory<>("maTc"));
+        clTenTc.setCellValueFactory(new PropertyValueFactory<>("tenTc"));
+        clKichThuocTc.setCellValueFactory(new PropertyValueFactory<>("size"));
+        clTinhTrangTc.setCellValueFactory(new PropertyValueFactory<>("tinhTrang"));
+
+        //Set fruit value into table
+        tableDonNhap.setItems(FXCollections.observableArrayList());
+
+        //Handle button Save fruit into Table
+        if (btnSave != null) {
             btnSave.setOnAction(event -> {
-                getField();
+                if (!checkField()){
+                    showAlert("Lỗi", "Vui lòng nhập đầy đủ thông tin trái cây");
+                }
+                else {
+                    getField();
+                    handleSaveAction();
+                }
             });
         } else {
-            System.out.println("Null cmnr");
+            System.out.println("Không tồn tại btnSave");
+        }
+    }
+
+    private Boolean checkField() {
+        if (fruitName.getText().isBlank() || fruitOrigin.getText().isBlank() || fruitQuantity.getText().isBlank() || fruitPriceImport.getText().isBlank() || fruitPriceExport.getText().isBlank() || fruitDVT.getText().isBlank()) {
+            return false;
+        }
+        else {
+            return true;
         }
     }
 
@@ -82,6 +125,18 @@ public class TaoMoiDonController {
         String loai = comboBoxFruitType.getValue();
         System.out.printf("Tên trái cây: %s, Xuất xứ: %s, Số lượng: %s, Giá nhập: %s, Giá xuất: %s, Tình trạng: %s, Đơn vị tính: %s, Kích thước: %s, Loại: %s%n",
                 tenTC, xuatXuTC, soLuongTC, giaNhapTC, giaXuatTC, tinhTrang, donViTinh, kichThuoc, loai);
+    }
+
+    private void handleSaveAction(){
+        if (!checkField()){
+            showAlert("Tông báo", "Vui lòng nhập đầy đu thông tin trái cây");
+        }
+        String maTC = "TC" + (tableDonNhap.getItems().size()+1);
+        String tenTC = fruitName.getText();
+        String tinhTrang = comboBoxTinhTrang.getValue();
+        String kichThuoc = comboBoxSize.getValue();
+        TraiCay fruit = new TraiCay(maTC, tenTC, kichThuoc, tinhTrang);
+        tableDonNhap.getItems().add(fruit);
     }
 
     private void showAlert(String title, String message) {

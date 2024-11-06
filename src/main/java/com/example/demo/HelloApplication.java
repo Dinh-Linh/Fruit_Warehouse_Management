@@ -22,7 +22,7 @@ public class HelloApplication extends Application {
         FXMLLoader taoDonMoiLoader = new FXMLLoader(getClass().getResource("TaoDonMoi.fxml"));
         Parent taoDonMoiRoot = taoDonMoiLoader.load();
 
-        // Tạo scene cho màn hình chính và thiết lập các thuộc tính cho stage
+        // Tạo scene cho các màn hình khác và thiết lập các thuộc tính cho stage
         Scene scene = new Scene(root, 835, 548);
         Scene donNhapScene = new Scene(donNhapRoot);
         stage.setScene(donNhapScene);
