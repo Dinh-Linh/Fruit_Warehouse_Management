@@ -3,6 +3,7 @@ package entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.RowId;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -17,11 +18,7 @@ import java.util.Objects;
 @Table(name = "chitietdonnhap")
 public class Chitietdonnhap implements Serializable {
     @EmbeddedId
-    private ChitietdonnhapPK id;
-
-    @Basic
-    @Column(name = "DonViTinh")
-    private String donViTinh;
+    private ChitietdonnhapPK id = new ChitietdonnhapPK();
 
     @Basic
     @Column(name = "SoLuong")
@@ -38,4 +35,9 @@ public class Chitietdonnhap implements Serializable {
     @MapsId("maTCCTDN")
     @JoinColumn(name = "MaTC")
     private Traicay traiCay_DonNhapHang;
+
+    public Chitietdonnhap(Chitietdonnhap chiTietDonNhap){
+        this.id = chiTietDonNhap.getId();
+        this.soLuong = chiTietDonNhap.getSoLuong();
+    }
 }

@@ -10,7 +10,7 @@
         <class>entity.Nhacungcap</class>
 <!--        <class>entity.NhacungcapTraicay</class>-->
         <class>entity.Traicay</class>
-        <class>entity.TraicayVitri</class>
+<!--        <class>entity.TraicayVitri</class>-->
         <class>entity.Vitri</class>
 
         <properties>

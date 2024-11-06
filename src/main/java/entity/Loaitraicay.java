@@ -2,6 +2,7 @@ package entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.UuidGenerator;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -17,7 +18,7 @@ import java.util.Set;
 @Entity
 @Table(name = "loaitraicay")
 public class Loaitraicay implements Serializable {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @UuidGenerator
     @Id
     @Column(name = "MaloaiTC")
     private String maloaiTc;
@@ -25,11 +26,15 @@ public class Loaitraicay implements Serializable {
     @Column(name = "TenloaiTC")
     private String tenloaiTc;
 
+    @Basic
+    @Column(name = "DonViTinh")
+    private String donViTinh;
+
     @ToString.Exclude
-    @OneToMany(mappedBy = "loaiTraiCayViTri", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "loaiTraiCayViTri", cascade = CascadeType.ALL/*, fetch = FetchType.EAGER*/)
     private Set<Vitri> viTriLTCSet = new HashSet<>();
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "loaiTraiCay_TraiCay", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "loaiTraiCay_TraiCay", cascade = CascadeType.ALL/*, fetch = FetchType.EAGER*/)
     private Set<Traicay> traiCayLoaiTraiCaySet = new HashSet<>();
 }

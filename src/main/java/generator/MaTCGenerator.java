@@ -76,6 +76,7 @@ public class MaTCGenerator implements IdentifierGenerator {
         hashMap.put("Bạc Liêu", "995");
         hashMap.put("Cà Mau", "996");
     }
+    //Mã trái cây: mã loại - kích thước - mã xuất xứ - ngày được lập phiếu - tính trạng
     @Override
     public Object generate(SharedSessionContractImplementor sharedSessionContractImplementor, Object o) {
         if(o instanceof Traicay) {
@@ -85,5 +86,11 @@ public class MaTCGenerator implements IdentifierGenerator {
         } else{
             return null;
         }
+    }
+
+    public String getMaTC(Traicay tc){
+        SimpleDateFormat sdf = new SimpleDateFormat("ddMMyy");
+        String datePart = sdf.format(new Date());
+        return tc.getLoaiTraiCay_TraiCay().getMaloaiTc() + "-" + tc.getSize() + "-" + hashMap.get(tc.getXuatXu()) + "-" + datePart + "-" + tc.getTinhTrang();
     }
 }

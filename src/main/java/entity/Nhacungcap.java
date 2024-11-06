@@ -44,7 +44,7 @@ public class Nhacungcap implements Serializable {
     private String email;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "nhaCungCapDonNhapHang", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "nhaCungCapDonNhapHang", cascade = CascadeType.ALL/*, fetch = FetchType.EAGER*/)
     private Set<Donnhaphang> donNhapHangSet = new HashSet<>();
 
     @ToString.Exclude

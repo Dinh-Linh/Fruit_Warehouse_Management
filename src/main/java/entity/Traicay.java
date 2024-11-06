@@ -1,7 +1,10 @@
 package entity;
 
+import generator.MaNCCGenerator;
+import generator.MaTCGenerator;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -18,7 +21,8 @@ import java.util.Set;
 @Entity
 @Table(name = "traicay")
 public class Traicay implements Serializable {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(generator = "MaTC")
+    @GenericGenerator(name = "MaTC", type = MaTCGenerator.class)
     @Id
     @jakarta.persistence.Column(name = "MaTC")
     private String maTc;
@@ -53,7 +57,7 @@ public class Traicay implements Serializable {
     private BigDecimal giaXuat;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "traiCay_DonNhapHang", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "traiCay_DonNhapHang", cascade = {CascadeType.REMOVE, CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private Set<Chitietdonnhap> chiTietDonNhapSet = new HashSet<>();
 
     @ToString.Exclude
@@ -66,6 +70,19 @@ public class Traicay implements Serializable {
     private Loaitraicay loaiTraiCay_TraiCay;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "traiCayVTTC", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<TraicayVitri> viTriVTTCSet = new HashSet<>();
+    @OneToOne(mappedBy = "traicayVitri", cascade = {CascadeType.REMOVE, CascadeType.DETACH, CascadeType.MERGE} /*, fetch = FetchType.EAGER*/)
+    private Vitri viTriVTTC;
+
+    public Traicay(Traicay tc){
+        this.maTc = tc.maTc;
+        this.tenTc = tc.tenTc;
+        this.size = tc.size;
+        this.tinhTrang = tc.tinhTrang;
+        this.xuatXu = tc.xuatXu;
+        this.giaNhap = tc.giaNhap;
+        this.giaXuat = tc.giaXuat;
+        this.loaiTraiCay_TraiCay = tc.loaiTraiCay_TraiCay;
+        //this.nhaCungCapTraiCaySet = tc.nhaCungCapTraiCaySet;
+    }
+
 }

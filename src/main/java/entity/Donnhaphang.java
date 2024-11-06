@@ -20,7 +20,7 @@ import java.util.Set;
 @Table(name = "donnhaphang")
 public class Donnhaphang implements Serializable {
     @GeneratedValue(generator = "MaDN")
-    @GenericGenerator(name = "MaDM", type = MaDNGenerator.class)
+    @GenericGenerator(name = "MaDN", type = MaDNGenerator.class)
     @Id
     @Column(name = "MaDN")
     private String maDn;
@@ -37,6 +37,12 @@ public class Donnhaphang implements Serializable {
     private Nhacungcap nhaCungCapDonNhapHang;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "chiTietDonNhap_DonNhapHang", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "chiTietDonNhap_DonNhapHang", cascade = {CascadeType.REMOVE, CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private Set<Chitietdonnhap> chiTietDonNhapSet = new HashSet<>();
+
+    public Donnhaphang(Donnhaphang donnhaphang) {
+        this.maDn = donnhaphang.getMaDn();
+        this.ngayTaoDon = donnhaphang.getNgayTaoDon();
+        this.tinhTrang = donnhaphang.getTinhTrang();
+    }
 }

@@ -38,6 +38,7 @@ public class Vitri implements Serializable {
     private Loaitraicay loaiTraiCayViTri;
 
     @ToString.Exclude
-    @OneToMany(mappedBy = "viTriVTTC", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<TraicayVitri> traicayVitriSet = new HashSet<>();
+    @OneToOne
+    @JoinColumn(name="MaTC")
+    private Traicay traicayVitri;
 }
