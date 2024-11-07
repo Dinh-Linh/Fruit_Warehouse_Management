@@ -1,14 +1,12 @@
 package com.example.demo;
 
 import com.example.demo.entity.TraiCay;
-import com.example.demo.utils.HandleDate;
 import com.example.demo.utils.Validator;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
