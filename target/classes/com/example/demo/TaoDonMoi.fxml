@@ -110,8 +110,8 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <TextField fx:id="fruitPriceExport" layoutX="98.0" layoutY="356.0" prefHeight="26.0" prefWidth="188.0" />
-                  <TextField fx:id="fruitPriceImport" layoutX="98.0" layoutY="306.0" prefHeight="26.0" prefWidth="188.0" />
+                  <TextField fx:id="fruitPriceExport" layoutX="98.0" layoutY="356.0" prefHeight="26.0" prefWidth="141.0" />
+                  <TextField fx:id="fruitPriceImport" layoutX="98.0" layoutY="306.0" prefHeight="26.0" prefWidth="141.0" />
                   <TextField fx:id="fruitQuantity" layoutX="98.0" layoutY="210.0" prefHeight="26.0" prefWidth="188.0" />
                   <TextField fx:id="fruitOrigin" layoutX="99.0" layoutY="123.0" prefHeight="26.0" prefWidth="188.0" />
                   <Button fx:id="btnSave" layoutX="80.0" layoutY="398.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="141.0" styleClass="taomoibox" text="Lưu vào đơn nhập" textFill="WHITE">
@@ -128,6 +128,8 @@
                   </Label>
                   <TextField fx:id="fruitName" layoutX="99.0" layoutY="78.0" prefHeight="26.0" prefWidth="188.0" />
                   <TextField fx:id="fruitDVT" layoutX="239.0" layoutY="38.0" prefHeight="25.0" prefWidth="44.0" />
+                  <Label layoutX="246.0" layoutY="311.0" prefHeight="17.0" prefWidth="30.0" text="VND" />
+                  <Label layoutX="247.0" layoutY="360.0" text="VND" />
                </children>
             </AnchorPane>
             <AnchorPane layoutX="315.0" layoutY="59.0" minWidth="-Infinity" prefHeight="446.0" prefWidth="357.0" style="-fx-border-color: grey; -fx-border-radius: 10px 10px 0 0;">
@@ -145,7 +147,6 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label fx:id="labelNgayNhap" layoutX="89.0" layoutY="43.0" prefHeight="17.0" prefWidth="125.0" text="dd/MM/yyyy" />
                   <TableView fx:id="tableDonNhap" layoutX="14.0" layoutY="72.0" prefHeight="200.0" prefWidth="329.0">
                      <columns>
                         <TableColumn fx:id="soTT" prefWidth="29.60003662109375" text="STT" />
@@ -165,13 +166,15 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="105.0" layoutY="294.0" text="None" />
+                  <Label fx:id="total" layoutX="105.0" layoutY="294.0" prefHeight="17.0" prefWidth="153.0" text="None" />
                   <TextField fx:id="supplier" layoutX="105.0" layoutY="329.0" prefHeight="26.0" prefWidth="238.0" />
                   <Button fx:id="btnTaoDon" layoutX="119.0" layoutY="395.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="141.0" styleClass="taomoibox" text="Tạo đơn" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
+                  <TextField fx:id="importDate" layoutX="98.0" layoutY="39.0" />
+                  <Label layoutX="270.0" layoutY="294.0" text="VND" />
                </children>
             </AnchorPane>
          </children></AnchorPane>
