@@ -14,3 +14,24 @@
 .ngancach{
     -fx-stroke: white;
 }
+.label-tittle{
+    -fx-border: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: #A5D6A7;
+}
+.label-color{
+    -fx-background-color: #A5D6A7;
+    -fx-background-radius:  0 10px 10px 0;
+    -fx-border: 1px 1px 1px 0;
+    -fx-border-color: #918E8E;
+}
+#buttonChiTiet {
+    -fx-background-color: #4290F7;
+    -fx-background-radius: 5px 5px 5px 5px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-padding: 2px 10px;
+}
+#buttonChiTiet:hover {
+    -fx-background-color: #257EF3;
+}

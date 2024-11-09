@@ -10,24 +10,26 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class DonNhapController {
-
-    @FXML
-    private Button btnTaoDonMoi;
-
+public class ChiTietDonController {
 
     @FXML
     private Label labelTrangChu;
+    @FXML
+    private Label labelNhapHang;
+    @FXML
+    private Button quayLaiButton;
 
     @FXML
     private void initialize() {
-        // Sự kiện khi nhấn vào btnTaoDonMoi để chuyển sang màn hình TaoDonMoi.fxml
-        btnTaoDonMoi.setOnMouseClicked(event -> {
-            loadScene("TaoDonMoi.fxml", 886, 550);
-        });
 
-        // Sự kiện khi nhấn vào labelTrangChu để chuyển đến trang chủ TrangChu.fxml
         labelTrangChu.setOnMouseClicked(event -> {
+            loadScene("TrangChu.fxml", 835, 548);
+        });
+        labelNhapHang.setOnMouseClicked(event -> {
+            loadScene("DonNhap.fxml", 835, 548);
+        });
+        // Thêm sự kiện cho nút "Quay lại"
+        quayLaiButton.setOnMouseClicked(event -> {
             loadScene("TrangChu.fxml", 835, 548);
         });
     }
@@ -36,7 +38,7 @@ public class DonNhapController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent root = fxmlLoader.load();
-            Stage stage = (Stage) btnTaoDonMoi.getScene().getWindow();
+            Stage stage = (Stage) quayLaiButton.getScene().getWindow();
             stage.setScene(new Scene(root, width, height));
         } catch (IOException e) {
             e.printStackTrace();
