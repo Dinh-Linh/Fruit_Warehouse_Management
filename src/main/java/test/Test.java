@@ -1,11 +1,7 @@
 package test;
 
-import connection.ConnectionStatic;
-import connection.ConnectionStaticImpl;
 import dao.*;
 import entity.*;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityTransaction;
 import javafx.collections.ObservableList;
 
 import java.math.BigDecimal;
