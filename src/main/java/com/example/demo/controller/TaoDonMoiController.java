@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.controller;
 
 import com.example.demo.entity.TraiCay;
 import com.example.demo.utils.Validator;
