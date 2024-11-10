@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="548.0" prefWidth="835.0" style="-fx-border-color: grey;" stylesheets="@styleTrangChu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.HomeController">
+<AnchorPane prefHeight="548.0" prefWidth="835.0" style="-fx-border-color: grey;" stylesheets="@styleTrangChu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.HomeController">
    <children>
       <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="176.0" style="-fx-border-color: grey;" styleClass="thanhmenu">
          <children>

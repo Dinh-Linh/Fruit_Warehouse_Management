@@ -8,6 +8,4 @@ module com.example.demo {
     exports com.example.demo;
     exports com.example.demo.entity;
     opens com.example.demo.entity to javafx.base;
-    exports com.example.demo.controller;
-    opens com.example.demo.controller to javafx.fxml;
 }
