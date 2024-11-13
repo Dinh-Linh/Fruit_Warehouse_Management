@@ -18,10 +18,13 @@ public class Validator {
 
     public boolean checkPassword(String input){
         //Password đảm bảo chứa ít nhất 1 chữ thường, 1 chữ hoa, 1 kí tự đặc biệt, 1 số, min = 12 kí tự
-        if(input.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{12,}$\n")){
+        if(input.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{12,}$")){
             return true;
         }
-        else return false;
+        else {
+            System.out.println("Password is incorrect");
+            return false;
+        }
     }
 
     public boolean checkUsername(String input){

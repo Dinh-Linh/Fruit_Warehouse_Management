@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.controller;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -30,7 +30,7 @@ public class ChiTietDonController {
         });
         // Thêm sự kiện cho nút "Quay lại"
         quayLaiButton.setOnMouseClicked(event -> {
-            loadScene("TrangChu.fxml", 835, 548);
+            loadScene("DonNhap.fxml", 835, 548);
         });
     }
 

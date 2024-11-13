@@ -13,8 +13,10 @@ module com.example.demo {
     opens generator to org.hibernate.orm.core;
 
     opens com.example.demo to javafx.fxml;
-    exports com.example.demo;
     exports com.example.demo.entity;
     opens com.example.demo.entity to javafx.base;
     exports dao;
+    exports com.example.demo.controller;
+    opens com.example.demo.controller to javafx.fxml;
+    exports com.example.demo;
 }

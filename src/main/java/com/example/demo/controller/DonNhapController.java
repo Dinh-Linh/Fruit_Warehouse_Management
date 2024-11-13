@@ -1,7 +1,6 @@
-package com.example.demo;
+package com.example.demo.controller;
 
 import com.example.demo.entity.DSDonNhap;
-import com.example.demo.service.RMIService;
 import dao.DAODonNhapHang;
 import dao.DAODonNhapHangImpl;
 import entity.Donnhaphang;
@@ -19,19 +18,22 @@ import javafx.util.Callback;
 
 import java.io.IOException;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class HomeController {
+public class DonNhapController {
 
     @FXML
-    private Label labelNhapHang;
+    private Button btnTaoDonMoi;
 
+
+    @FXML
+    private Label labelTrangChu;
     @FXML
     private ComboBox<String> comboBoxLoaiTraiCay;
-
     @FXML
-    private TableView<DSDonNhap> tableDSDonNhap;
+    private TableView<Donnhaphang> tableDSDonNhap;
 
     @FXML
     private TableColumn<DSDonNhap, String> colIdDon;
@@ -43,19 +45,22 @@ public class HomeController {
     private TableColumn<DSDonNhap, String> colTrangThai;
     @FXML
     private TableColumn<DSDonNhap, Button> colThongTin;
-
     private DAODonNhapHang dnhService = new DAODonNhapHangImpl();
 
-    public HomeController() throws RemoteException {
+    public DonNhapController() throws RemoteException {
     }
 
     @FXML
     private void initialize() {
-        // Cấu hình sự kiện click cho labelNhapHang
-        labelNhapHang.setOnMouseClicked(event -> {
-            loadScene("DonNhap.fxml");
+        // Sự kiện khi nhấn vào btnTaoDonMoi để chuyển sang màn hình TaoDonMoi.fxml
+        btnTaoDonMoi.setOnMouseClicked(event -> {
+            loadScene("TaoDonMoi.fxml", 886, 550);
         });
 
+        // Sự kiện khi nhấn vào labelTrangChu để chuyển đến trang chủ TrangChu.fxml
+        labelTrangChu.setOnMouseClicked(event -> {
+            loadScene("TrangChu.fxml", 835, 548);
+        });
         // Dữ liệu mẫu vào TableView
         ObservableList<DSDonNhap> data = FXCollections.observableArrayList(
                 new DSDonNhap("1", new Date(), "NCC A", "Đã nhập"),
@@ -64,14 +69,25 @@ public class HomeController {
                 new DSDonNhap("4", new Date(), "NCC D", "Chưa nhập"),
                 new DSDonNhap("5", new Date(), "NCC E", "Đã nhập")
         );
-        setUpComboBox();
-        setUpTableCol();
 
+//        tableDSDonNhap.setItems(data);
+        setUpTableCol();
+        setUpComboBox();
         loadDonNhapData();
-        tableDSDonNhap.setItems(data);  // Điền dữ liệu vào TableView
     }
 
-    private void setUpComboBox(){
+    private void setUpTableCol() {
+        // Cấu hình các cột cho TableView
+        colIdDon.setCellValueFactory(new PropertyValueFactory<>("maDn"));
+        colNgayNhap.setCellValueFactory(new PropertyValueFactory<>("ngayTaoDon"));
+        colNhaCungCap.setCellValueFactory(new PropertyValueFactory<>("tenNhaCungCap"));
+        colTrangThai.setCellValueFactory(new PropertyValueFactory<>("tinhTrang"));
+
+        // Thiết lập cột "Thông tin" để chứa Button
+        colThongTin.setCellFactory(new DonNhapController.ButtonCellFactory());
+    }
+
+    private void setUpComboBox() {
         // Thêm các loại trái cây phổ biến vào ComboBox
         ObservableList<String> options = FXCollections.observableArrayList(
                 "Loại 1", "Loại 2", "Loại 3"
@@ -79,27 +95,17 @@ public class HomeController {
         comboBoxLoaiTraiCay.setItems(options);
     }
 
-    private void setUpTableCol(){
-        // Cấu hình các cột cho TableView
-        colIdDon.setCellValueFactory(new PropertyValueFactory<>("idDon"));
-        colNgayNhap.setCellValueFactory(new PropertyValueFactory<>("ngayNhap"));
-        colNhaCungCap.setCellValueFactory(new PropertyValueFactory<>("nhaCungCap"));
-        colTrangThai.setCellValueFactory(new PropertyValueFactory<>("trangThai"));
-
-        // Thiết lập cột "Thông tin" để chứa Button
-        colThongTin.setCellFactory(new ButtonCellFactory());
-    }
-
-    private void loadScene(String fxmlFile) {
+    private void loadScene(String fxmlFile, int width, int height) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
             Parent root = fxmlLoader.load();
-            Stage stage = (Stage) labelNhapHang.getScene().getWindow();
-            stage.setScene(new Scene(root, 835, 548));
+            Stage stage = (Stage) btnTaoDonMoi.getScene().getWindow();
+            stage.setScene(new Scene(root, width, height));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     public static class ButtonCellFactory implements Callback<TableColumn<DSDonNhap, Button>, TableCell<DSDonNhap, Button>> {
         @Override
@@ -131,15 +137,19 @@ public class HomeController {
         }
     }
 
-    private void loadDonNhapData(){
-        try{
-//            ObservableList<Donnhaphang> donNhapList = dnhService.getAllDonnhaphang();
-//            System.out.println(donNhapList.toString());
-            ObservableList<Donnhaphang> donnhaphangs = FXCollections.observableArrayList(dnhService.getAllDonnhaphang());
-            System.out.println(donnhaphangs);
-        }catch (Exception e){
+    private void loadDonNhapData() {
+        try {
+            List<Donnhaphang> donnhaphangList = dnhService.getAllDonnhaphang();
+            if (donnhaphangList == null){
+                donnhaphangList = new ArrayList<>();
+            }
+            ObservableList<Donnhaphang> donnhaphangs = FXCollections.observableArrayList(donnhaphangList);
+            tableDSDonNhap.setItems(donnhaphangs);
+            if (donnhaphangs.size() == 0) {
+                System.out.println("Danh sách đơn nhập hàng trống");
+            } else System.out.println(donnhaphangs);
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
-
 }

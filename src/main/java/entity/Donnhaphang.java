@@ -45,4 +45,8 @@ public class Donnhaphang implements Serializable {
         this.ngayTaoDon = donnhaphang.getNgayTaoDon();
         this.tinhTrang = donnhaphang.getTinhTrang();
     }
+
+    public String getTenNhaCungCap() {
+        return nhaCungCapDonNhapHang != null ? nhaCungCapDonNhapHang.getTenNcc() : null;
+    }
 }
