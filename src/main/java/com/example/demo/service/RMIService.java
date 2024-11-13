@@ -16,7 +16,7 @@ public class RMIService {
 
     static {
         try {
-            Registry registry = LocateRegistry.getRegistry("localhost", 1009);
+            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
             dnh = (DAODonNhapHang) registry.lookup("DonNhapHang");
             ltc = (DAOLoaiTraiCay) registry.lookup("LoaiTraiCay");
             ncc = (DAONhaCungCap) registry.lookup("NhaCungCap");

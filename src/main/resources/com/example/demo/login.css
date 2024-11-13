@@ -1,0 +1,14 @@
+.username{
+    -fx-text-fill: #fbfcfc;
+}
+.password {
+    -fx-text-fill: #fbfcfc;
+}
+.button_xacnhan {
+    -fx-background-color: #6dd89f; /* Màu nền mặc định */
+    -fx-text-fill: WHITE;
+    -fx-region-border: 20;
+}
+.button_xacnhan:hover {
+    -fx-background-color: #5fb68c;
+}

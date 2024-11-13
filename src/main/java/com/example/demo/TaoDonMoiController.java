@@ -2,6 +2,12 @@ package com.example.demo;
 
 import com.example.demo.entity.TraiCay;
 import com.example.demo.utils.Validator;
+import dao.DAODonNhapHang;
+import dao.DAODonNhapHangImpl;
+import dao.DAONhaCungCap;
+import dao.DAONhaCungCapImpl;
+import entity.*;
+import generator.MaTCGenerator;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,10 +18,9 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class TaoDonMoiController {
     Validator validator = new Validator();
@@ -26,7 +31,7 @@ public class TaoDonMoiController {
     private Label labelNhapHang;
 
     @FXML
-    private TableView<TraiCay> tableDonNhap;  // Sửa kiểu dữ liệu từ Object thành TraiCay
+    private TableView<Traicay> tableDonNhap;  // Sửa kiểu dữ liệu từ Object thành TraiCay
 
     @FXML
     private Button btnTaoDon;
@@ -115,7 +120,7 @@ public class TaoDonMoiController {
                 } else if (supplier.getText().isBlank() && tableDonNhap.getItems().isEmpty()) {
                     showAlert("Thông báo", "Nhập đầy đủ thông tin");
                 } else {
-                    showAlert("Tạo đơn thành công", "Đơn đã được tạo thành công.");
+                    createDNHFromUI();
                 }
             });
         } else {
@@ -170,6 +175,47 @@ public class TaoDonMoiController {
         }
     }
 
+    private void createDNHFromUI() {
+        try {
+            //Get Data from UI
+            String ncc = supplier.getText();
+            java.sql.Date ngayTaoDon = new java.sql.Date(new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(importDate.getText()).getTime());
+            String trangThai = "Đang xử lý";
+            Donnhaphang donnhaphang = Donnhaphang.builder().ngayTaoDon(ngayTaoDon).tinhTrang(trangThai).build();
+
+            //Search Supplier
+            DAONhaCungCap daoNhaCungCap = new DAONhaCungCapImpl();
+            Nhacungcap nhacungcapObj = daoNhaCungCap.getNhaCungCap(ncc);
+            if (nhacungcapObj != null){
+                donnhaphang.setNhaCungCapDonNhapHang(nhacungcapObj);
+                System.out.println(nhacungcapObj);
+            }
+            else {
+                System.out.println("Không tìm thấy nhà cung cấp với tên " + ncc);
+            }
+            //Add details for DonNhapHang
+            Set<Chitietdonnhap> chitietdonnhapSet = new HashSet<>();
+            for (Traicay tc : tableDonNhap.getItems()) {
+                Chitietdonnhap details = new Chitietdonnhap();
+                details.setTraiCay_DonNhapHang(tc);
+                details.setChiTietDonNhap_DonNhapHang(donnhaphang);
+                chitietdonnhapSet.add(details);
+            }
+
+            //Set chiTietDonNhap into DonNhapHang
+            donnhaphang.setChiTietDonNhapSet(chitietdonnhapSet);
+            DAODonNhapHang daoDonNhapHang = new DAODonNhapHangImpl();
+            if (daoDonNhapHang.createDonNhapHang(donnhaphang)){
+                showAlert("Thông báo", "Đơn đã được tạo thành công.");
+            }
+            else {
+                showAlert("Thông báo", "Lỗi khi lưu");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private Boolean checkField() {
         if (fruitName.getText().isBlank() || fruitOrigin.getText().isBlank() || fruitQuantity.getText().isBlank() || fruitPriceImport.getText().isBlank() || fruitPriceExport.getText().isBlank() || fruitDVT.getText().isBlank()) {
             return false;
@@ -191,26 +237,29 @@ public class TaoDonMoiController {
         String tenTC = fruitName.getText();
         String xuatXuTC = fruitOrigin.getText();
         String soLuongTC = fruitQuantity.getText();
-        String giaNhapTC = fruitPriceImport.getText();
-        String giaXuatTC = fruitPriceExport.getText();
         String donViTinh = fruitDVT.getText();
         String tinhTrang = comboBoxTinhTrang.getValue();
         String kichThuoc = comboBoxSize.getValue();
         String loai = comboBoxFruitType.getValue();
+        BigDecimal giaNhap = new BigDecimal(fruitPriceImport.getText());
+        BigDecimal giaXuat = new BigDecimal(fruitPriceExport.getText());
         System.out.printf("Tên trái cây: %s, Xuất xứ: %s, Số lượng: %s, Giá nhập: %s, Giá xuất: %s, Tình trạng: %s, Đơn vị tính: %s, Kích thước: %s, Loại: %s%n",
-                tenTC, xuatXuTC, soLuongTC, giaNhapTC, giaXuatTC, tinhTrang, donViTinh, kichThuoc, loai);
+                tenTC, xuatXuTC, soLuongTC, giaNhap, giaXuat, tinhTrang, donViTinh, kichThuoc, loai);
     }
 
     private void handleSaveAction() {
+        MaTCGenerator maTCGenerator = new MaTCGenerator();
         if (!checkField()) {
             showAlert("Thông báo", "Vui lòng nhập đầy đủ thông tin trái cây");
         }
-        String maTC = "TC" + (tableDonNhap.getItems().size() + 1);
+//        String maTC = maTCGenerator.getMaTC(tableDonNhap.getItems().get(1));
         String tenTC = fruitName.getText();
         String tinhTrang = comboBoxTinhTrang.getValue();
         String kichThuoc = comboBoxSize.getValue();
-        TraiCay fruit = new TraiCay(maTC, tenTC, kichThuoc, tinhTrang);
+        Traicay fruit = Traicay.builder().tenTc(tenTC).tinhTrang(tinhTrang).size(kichThuoc).build();
 
+        fruit.setLoaiTraiCay_TraiCay(Loaitraicay.builder().build());
+        fruit.setMaTc(maTCGenerator.getMaTC(fruit));
         // Set Fruit into Table
         tableDonNhap.getItems().add(fruit);
         clearDataField();

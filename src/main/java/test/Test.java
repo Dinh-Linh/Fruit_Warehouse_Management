@@ -17,6 +17,7 @@ public class Test {
         try{
             DAODonNhapHang daoDonNhapHang = new DAODonNhapHangImpl();
             ObservableList<Donnhaphang> list = daoDonNhapHang.getAllDonnhaphang();
+            System.out.println(list.size());
             for(Donnhaphang donnhaphang : list){
                 System.out.println(donnhaphang);
             }
@@ -180,13 +181,13 @@ public class Test {
     }
 
     public static void main(String[] args) {
-//        testGetAllDonnhaphang();
+        testGetAllDonnhaphang();
 //        testGetLoaiTraiCayList();
 //        testGetNhaCungCap();
 //        testCreateDonNhaHang();
 //        testGetDonNhapHangByFruitType();
 //        testGetBeforeReceivedRatioByFruitType();
-        testGetAfterReceivedRatioByFruitType();
+//        testGetAfterReceivedRatioByFruitType();
         System.exit(0);
     }
 }

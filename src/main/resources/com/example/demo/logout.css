@@ -1,0 +1,8 @@
+.button {
+    -fx-background-color: #6dd89f; /* Màu nền mặc định */
+    -fx-text-fill: WHITE;
+    -fx-region-border: 20;
+}
+.button:hover {
+    -fx-background-color: #5fb68c;
+}
