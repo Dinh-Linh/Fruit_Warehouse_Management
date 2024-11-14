@@ -38,7 +38,7 @@ public class LoginController {
         taiKhoanList.add(new TaiKhoan("nguoidung3", "User@123456789", "LOCK", Time.valueOf("00:00:00"), Date.valueOf("2024-03-01"), Date.valueOf("2025-03-01")));
         taiKhoanList.add(new TaiKhoan("nguoidung4", "User@123456789", "FIRST", Time.valueOf("00:00:00"), Date.valueOf("2024-04-01"), Date.valueOf("2025-04-01")));
         taiKhoanList.add(new TaiKhoan("nguoidung5", "User@123456789", "QUIT", Time.valueOf("00:00:00"), Date.valueOf("2024-05-01"), Date.valueOf("2025-05-01")));
-        taiKhoanList.add(new TaiKhoan("administrator", "Administrator123", "QUIT", Time.valueOf("00:00:00"), Date.valueOf("2024-05-01"), Date.valueOf("2025-05-01")));
+        taiKhoanList.add(new TaiKhoan("administrator", "Administrator123", "OFF", Time.valueOf("00:00:00"), Date.valueOf("2024-05-01"), Date.valueOf("2025-05-01")));
         btnLogin.setOnAction(actionEvent -> {
             String tenDangNhap = username.getText();
             String matKhau = password.getText();
@@ -48,7 +48,7 @@ public class LoginController {
             if (validator.checkUsername(tenDangNhap) && validator.checkPassword(matKhau)) {
                 if (tk != null && tk.checkLoginWithStatus(tenDangNhap, matKhau)) {
                     //Nếu tên tk là administrator thì chuyeenr đến trang chủ của admin
-                    if (tk.getUsername().equals(tenDangNhap)) {
+                    if ("administrator".equals(tenDangNhap)) {
                         navigateToMainScreen("TrangChu.fxml");
                     } else {
                         //Ngược lại trên
@@ -69,7 +69,7 @@ public class LoginController {
 
     public void navigateToMainScreen(String xmlFile) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(xmlFile));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo/" + xmlFile));
             Parent mainRoot = fxmlLoader.load();
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.setScene(new Scene(mainRoot, 835, 548));

@@ -54,12 +54,12 @@ public class DonNhapController {
     private void initialize() {
         // Sự kiện khi nhấn vào btnTaoDonMoi để chuyển sang màn hình TaoDonMoi.fxml
         btnTaoDonMoi.setOnMouseClicked(event -> {
-            loadScene("TaoDonMoi.fxml", 886, 550);
+            loadScene("TaoDonMoi.fxml");
         });
 
         // Sự kiện khi nhấn vào labelTrangChu để chuyển đến trang chủ TrangChu.fxml
         labelTrangChu.setOnMouseClicked(event -> {
-            loadScene("TrangChu.fxml", 835, 548);
+            loadScene("TrangChu.fxml");
         });
         // Dữ liệu mẫu vào TableView
         ObservableList<DSDonNhap> data = FXCollections.observableArrayList(
@@ -95,12 +95,12 @@ public class DonNhapController {
         comboBoxLoaiTraiCay.setItems(options);
     }
 
-    private void loadScene(String fxmlFile, int width, int height) {
+    public void loadScene(String xmlFile) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = fxmlLoader.load();
-            Stage stage = (Stage) btnTaoDonMoi.getScene().getWindow();
-            stage.setScene(new Scene(root, width, height));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo/" + xmlFile));
+            Parent mainRoot = fxmlLoader.load();
+            Stage stage = (Stage) labelTrangChu.getScene().getWindow();
+            stage.setScene(new Scene(mainRoot, 835, 548));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -120,7 +120,7 @@ public class DonNhapController {
                         button.setOnAction(e -> {
                             // Gọi phương thức chuyển trang
                             Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-                            FXMLLoader loader = new FXMLLoader(getClass().getResource("ChiTietDon.fxml"));
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/ChiTietDon.fxml"));
                             try {
                                 Parent root = loader.load();
                                 stage.setScene(new Scene(root));

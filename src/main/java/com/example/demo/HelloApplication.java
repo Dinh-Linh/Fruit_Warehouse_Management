@@ -14,7 +14,7 @@ public class HelloApplication extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("FormDangNhap.fxml"));
         Parent root = fxmlLoader.load();
 
-        Scene scene = new Scene(root, 835, 548);
+        Scene scene = new Scene(root, 860, 548);
         scene.getStylesheets().add(getClass().getResource("login.css").toExternalForm());
         stage.setTitle("Quản lý kho hàng trái cây");
         stage.setScene(scene);

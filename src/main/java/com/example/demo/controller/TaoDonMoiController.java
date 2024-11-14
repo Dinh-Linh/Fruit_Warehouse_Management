@@ -93,10 +93,10 @@ public class TaoDonMoiController {
     private void initialize() {
 
         labelTrangChu.setOnMouseClicked(event -> {
-            loadScene("TrangChu.fxml", 835, 548);
+            loadScene("TrangChu.fxml");
         });
         labelNhapHang.setOnMouseClicked(event -> {
-            loadScene("DonNhap.fxml", 835, 548);
+            loadScene("DonNhap.fxml");
         });
 
 
@@ -164,12 +164,12 @@ public class TaoDonMoiController {
         }
     }
 
-    private void loadScene(String fxmlFile, int width, int height) {
+    private void loadScene(String fxmlFile) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo/"+ fxmlFile));
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) labelTrangChu.getScene().getWindow();
-            stage.setScene(new Scene(root, width, height));
+            stage.setScene(new Scene(root));
         } catch (IOException e) {
             e.printStackTrace();
         }
