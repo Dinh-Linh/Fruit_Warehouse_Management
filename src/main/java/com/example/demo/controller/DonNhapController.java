@@ -100,7 +100,7 @@ public class DonNhapController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo/" + xmlFile));
             Parent mainRoot = fxmlLoader.load();
             Stage stage = (Stage) labelTrangChu.getScene().getWindow();
-            stage.setScene(new Scene(mainRoot, 835, 548));
+            stage.setScene(new Scene(mainRoot, 921, 548));
         } catch (IOException e) {
             e.printStackTrace();
         }

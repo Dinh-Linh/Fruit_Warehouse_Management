@@ -99,7 +99,6 @@ public class TaoDonMoiController {
             loadScene("DonNhap.fxml");
         });
 
-
         //Set default value for ComboBox
         comboBoxSize.setValue("S");
         comboBoxFruitType.setValue("Loại 1");

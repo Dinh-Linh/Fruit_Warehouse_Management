@@ -5,7 +5,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="548.0" prefWidth="835.0" style="-fx-border-color: grey;" stylesheets="@styleDonNhap.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.DonNhapController">
+<AnchorPane prefHeight="548.0" prefWidth="921.0" style="-fx-border-color: grey;" stylesheets="@styleDonNhap.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.DonNhapController">
     <children>
         <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="176.0" style="-fx-border-color: grey;" styleClass="thanhmenu">
             <children>
@@ -48,7 +48,7 @@
                 </Label>
             </children>
         </AnchorPane>
-        <AnchorPane id="dsdonnhap" layoutX="191.0" layoutY="19.0" prefHeight="518.0" prefWidth="626.0" style="-fx-border-radius: 10; -fx-border-color: grey;">
+        <AnchorPane id="dsdonnhap" layoutX="191.0" layoutY="19.0" prefHeight="518.0" prefWidth="706.0" style="-fx-border-radius: 10; -fx-border-color: grey;">
             <children>
                 <AnchorPane layoutX="13.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="178.0" style="-fx-border-radius: 0 10 10 0; -fx-border-color: #918E8E;" styleClass="label-tittle">
                     <children>
@@ -70,38 +70,34 @@
                         <AnchorPane layoutX="78.0" prefHeight="27.0" prefWidth="30.0" style="-fx-border-radius: 0 10 10 0;" styleClass="label-color" />
                     </children>
                 </AnchorPane>
-                <Label fx:id="idType" layoutX="362.0" layoutY="14.0" prefHeight="27.0" prefWidth="82.0" text="Loại trái cây : ">
+                <Label fx:id="idType" layoutX="440.0" layoutY="14.0" prefHeight="27.0" prefWidth="82.0" text="Loại trái cây : ">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Label>
-                <ComboBox fx:id="comboBoxLoaiTraiCay" layoutX="456.0" layoutY="17.0" prefWidth="150.0" />
+                <ComboBox fx:id="comboBoxLoaiTraiCay" layoutX="531.0" layoutY="15.0" prefWidth="150.0" />
                 <AnchorPane layoutX="17.0" layoutY="89.0" prefHeight="42.0" prefWidth="170.0" style="-fx-background-color: grey; -fx-background-radius: 0 10 10 0;">
                <children>
                         <Label layoutX="6.0" prefHeight="42.0" prefWidth="194.0" styleClass="phantram-text" text="Kho hàng còn % không gian " />
                </children>
                 </AnchorPane>
-                <AnchorPane layoutX="481.0" layoutY="46.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="125.0" style="-fx-border-radius: 10 0 0 10; -fx-border-color: #918E8E;" styleClass="label-tittle">
-                    <children>
-                        <Label alignment="CENTER_RIGHT" layoutX="34.0" layoutY="2.0" prefHeight="27.0" prefWidth="81.0" text="Sau khi nhập " textAlignment="RIGHT">
-                            <font>
-                                <Font name="System Bold" size="12.0" />
-                            </font>
-                        </Label>
-                    </children>
+                <AnchorPane layoutX="556.0" layoutY="46.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="125.0" style="-fx-border-radius: 10 0 0 10; -fx-border-color: #918E8E;" styleClass="label-tittle">
+               <children>
+                      <AnchorPane layoutX="-1.0" layoutY="-1.0" prefHeight="31.0" prefWidth="30.0" style="-fx-border-radius: 10 0 0 10; -fx-background-radius: 10 0 0 10;" styleClass="label-color" />
+               </children>
                 </AnchorPane>
-                <AnchorPane layoutX="428.0" layoutY="89.0" prefHeight="42.0" prefWidth="178.0" style="-fx-background-color: grey; -fx-background-radius: 10 0 0 10;">
+                <AnchorPane layoutX="503.0" layoutY="89.0" prefHeight="42.0" prefWidth="178.0" style="-fx-background-color: grey; -fx-background-radius: 10 0 0 10;">
                     <children>
                         <Label layoutX="10.0" layoutY="11.0" prefHeight="20.0" prefWidth="158.0" text="Kho hàng còn % không gian " />
                     </children>
                 </AnchorPane>
-                <TableView fx:id="tableDSDonNhap" layoutX="8.0" layoutY="146.0" minWidth="-Infinity" prefHeight="325.0" prefWidth="609.0">
+                <TableView fx:id="tableDSDonNhap" layoutX="8.0" layoutY="146.0" minWidth="-Infinity" prefHeight="325.0" prefWidth="681.0">
                     <columns>
-                        <TableColumn fx:id="colIdDon" prefWidth="84.0" text="ID đơn " />
-                        <TableColumn fx:id="colNgayNhap" prefWidth="109.5999755859375" text="Ngày nhập " />
-                        <TableColumn fx:id="colNhaCungCap" prefWidth="167.20001220703125" text="Nhà cung cấp" />
-                        <TableColumn fx:id="colTrangThai" prefWidth="165.5999755859375" text="Trạng thái " />
-                        <TableColumn fx:id="colThongTin" prefWidth="76.0" text="Thông tin" />
+                        <TableColumn fx:id="colIdDon" prefWidth="154.0" text="ID đơn " />
+                        <TableColumn fx:id="colNgayNhap" prefWidth="137.0" text="Ngày nhập " />
+                        <TableColumn fx:id="colNhaCungCap" prefWidth="172.0" text="Nhà cung cấp" />
+                        <TableColumn fx:id="colTrangThai" prefWidth="134.0" text="Trạng thái " />
+                        <TableColumn fx:id="colThongTin" prefWidth="83.0" text="Thông tin" />
                     </columns>
                 </TableView>
                 <Button fx:id="btnTaoDonMoi" layoutX="478.0" layoutY="480.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="132.0" styleClass="taomoibox" text="Tạo đơn mới" textFill="WHITE">
@@ -109,7 +105,11 @@
                         <Font name="System Bold" size="14.0" />
                     </font>
                 </Button>
-                <AnchorPane layoutX="481.0" layoutY="46.0" prefHeight="31.0" prefWidth="30.0" style="-fx-border-radius: 10 0 0 10; -fx-background-radius: 10 0 0 10;" styleClass="label-color" />
+                  <Label alignment="CENTER_RIGHT" layoutX="587.0" layoutY="48.0" prefHeight="27.0" prefWidth="81.0" text="Sau khi nhập " textAlignment="RIGHT">
+                      <font>
+                          <Font name="System Bold" size="12.0" />
+                      </font>
+                  </Label>
             </children>
         </AnchorPane>
     </children>

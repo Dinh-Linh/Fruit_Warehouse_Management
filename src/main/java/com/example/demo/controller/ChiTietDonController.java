@@ -23,14 +23,14 @@ public class ChiTietDonController {
     private void initialize() {
 
         labelTrangChu.setOnMouseClicked(event -> {
-            loadScene("TrangChu.fxml", 835, 548);
+            loadScene("TrangChu.fxml", 921, 548);
         });
         labelNhapHang.setOnMouseClicked(event -> {
-            loadScene("DonNhap.fxml", 835, 548);
+            loadScene("DonNhap.fxml", 921, 548);
         });
         // Thêm sự kiện cho nút "Quay lại"
         quayLaiButton.setOnMouseClicked(event -> {
-            loadScene("DonNhap.fxml", 835, 548);
+            loadScene("DonNhap.fxml", 921, 548);
         });
     }
 

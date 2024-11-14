@@ -38,7 +38,7 @@ public class LoginController {
         taiKhoanList.add(new TaiKhoan("nguoidung3", "User@123456789", "LOCK", Time.valueOf("00:00:00"), Date.valueOf("2024-03-01"), Date.valueOf("2025-03-01")));
         taiKhoanList.add(new TaiKhoan("nguoidung4", "User@123456789", "FIRST", Time.valueOf("00:00:00"), Date.valueOf("2024-04-01"), Date.valueOf("2025-04-01")));
         taiKhoanList.add(new TaiKhoan("nguoidung5", "User@123456789", "QUIT", Time.valueOf("00:00:00"), Date.valueOf("2024-05-01"), Date.valueOf("2025-05-01")));
-        taiKhoanList.add(new TaiKhoan("administrator", "Administrator123", "OFF", Time.valueOf("00:00:00"), Date.valueOf("2024-05-01"), Date.valueOf("2025-05-01")));
+        taiKhoanList.add(new TaiKhoan("administrator", "Administrator@123", "OFF", Time.valueOf("00:00:00"), Date.valueOf("2024-05-01"), Date.valueOf("2025-05-01")));
         btnLogin.setOnAction(actionEvent -> {
             String tenDangNhap = username.getText();
             String matKhau = password.getText();
@@ -46,20 +46,24 @@ public class LoginController {
 
             //Check username và password đúng định dạng
             if (validator.checkUsername(tenDangNhap) && validator.checkPassword(matKhau)) {
-                if (tk != null && tk.checkLoginWithStatus(tenDangNhap, matKhau)) {
-                    //Nếu tên tk là administrator thì chuyeenr đến trang chủ của admin
-                    if ("administrator".equals(tenDangNhap)) {
-                        navigateToMainScreen("TrangChu.fxml");
+                if (tk != null) {
+                    if (tk.checkLoginWithStatus(tenDangNhap, matKhau)) {
+                        //Nếu tên tk là administrator thì chuyeenr đến trang chủ của admi
+                        if ("administrator".equals(tenDangNhap)) {
+                            navigateToMainScreen("TrangChu.fxml");
+                        } else {
+                            //Ngược lại trên
+                            navigateToMainScreen("TrangChuNV.fxml");
+                        }
                     } else {
-                        //Ngược lại trên
-                        navigateToMainScreen("TrangChuNV.fxml");
+                        new ShowAlert().showAlert("Thông báo", "Tên đăng nhập hoặc mật khẩu không chính xác");
                     }
                 } else {
                     System.out.println("Không tồn tại tài khoản");
-                    new ShowAlert().showAlert("Thông báo", "Tên đăng nhập hoặc mật khẩu không chính xác");
+                    new ShowAlert().showAlert("Thông báo", "Không tồn tại tài khoản");
                 }
             } else {
-                new ShowAlert().showAlert("Thông báo", "Tên đăng nhập hoặc mật khẩu không chính xác");
+                new ShowAlert().showAlert("Thông báo", "Sai định dạng username và password");
             }
         });
     }
@@ -72,7 +76,7 @@ public class LoginController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo/" + xmlFile));
             Parent mainRoot = fxmlLoader.load();
             Stage stage = (Stage) btnLogin.getScene().getWindow();
-            stage.setScene(new Scene(mainRoot, 835, 548));
+            stage.setScene(new Scene(mainRoot, 921, 548));
         } catch (IOException e) {
             e.printStackTrace();
         }

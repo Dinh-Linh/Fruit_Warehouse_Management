@@ -27,7 +27,7 @@ public class HomeController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo/" + fxmlFile));
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) labelNhapHang.getScene().getWindow();
-            stage.setScene(new Scene(root, 835, 548));
+            stage.setScene(new Scene(root, 921, 548));
         } catch (IOException e) {
             e.printStackTrace();
         }
