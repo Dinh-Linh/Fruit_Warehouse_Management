@@ -37,6 +37,11 @@ public class Donnhaphang implements Serializable {
     private Nhacungcap nhaCungCapDonNhapHang;
 
     @ToString.Exclude
+    @ManyToOne
+    @JoinColumn(name = "IdTaiKhoan")
+    private Taikhoan taiKhoan;
+
+    @ToString.Exclude
     @OneToMany(mappedBy = "chiTietDonNhap_DonNhapHang", cascade = {CascadeType.REMOVE, CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.EAGER)
     private Set<Chitietdonnhap> chiTietDonNhapSet = new HashSet<>();
 

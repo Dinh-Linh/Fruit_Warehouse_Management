@@ -12,6 +12,7 @@
         <class>entity.Traicay</class>
 <!--        <class>entity.TraicayVitri</class>-->
         <class>entity.Vitri</class>
+        <class>entity.Taikhoan</class>
 
         <properties>
             <property name="toplink.jdbc.url" value="jdbc:mysql://localhost:3306/quanlykho"/>
