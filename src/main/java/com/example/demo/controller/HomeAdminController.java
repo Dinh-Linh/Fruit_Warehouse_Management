@@ -16,26 +16,27 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Optional;
 
-public class TrangChuNVController {
+public class HomeAdminController {
+
+    @FXML
+    private Label labelNhapHang;
+    @FXML
+    private Button dangXuat;
     private TaiKhoan currentAccount;
-    @FXML
-    private Label labelTrangChu;
-    @FXML
-    private Button doiMk;
-    @FXML
-    private Button logout;
-    @FXML
-    public void initialize(){
-        doiMk.setOnMouseClicked(event -> {
-            loadScene("DoiMKNV.fxml");
-        });
-        logout.setOnAction(actionEvent -> {
-            handleLogout(actionEvent);
-        });
-    }
 
     public void setCurrentAccount(TaiKhoan account) {
         this.currentAccount = account;
+    }
+
+    @FXML
+    private void initialize() {
+        // Cấu hình sự kiện click cho labelNhapHang
+        labelNhapHang.setOnMouseClicked(event -> {
+            loadScene("DonNhap.fxml");
+        });
+        dangXuat.setOnAction(actionEvent -> {
+            handleLogout(actionEvent);
+        });
     }
     public void handleLogout(ActionEvent event){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -59,10 +60,11 @@ public class TrangChuNVController {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo/" + fxmlFile));
             Parent root = fxmlLoader.load();
-            Stage stage = (Stage) labelTrangChu.getScene().getWindow();
+            Stage stage = (Stage) labelNhapHang.getScene().getWindow();
             stage.setScene(new Scene(root, 921, 548));
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

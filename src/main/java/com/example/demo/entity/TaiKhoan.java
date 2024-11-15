@@ -76,17 +76,17 @@ public class TaiKhoan {
     public boolean checkInfLogin(String inputUsername, String inputPassword) {
         if (this.username.equals(inputUsername) && this.password.equals(inputPassword)) {
             loginAttempt = 0;
+            this.status = Status.ON;
             System.out.println("Login Successful");
             return true;
         } else {
             loginAttempt++;
             System.out.println("Bạn đã nhập sai tên đăng nhập hoặc mật khẩu. Hãy kiểm tra lại");
-            showAlert.showAlert("Thông báo", "Bạn đã nhập sai tên đăng nhập hoặc mật khẩu. Hãy kiểm tra lại");
+            //showAlert.showAlert("Thông báo", "Bạn đã nhập sai tên đăng nhập hoặc mật khẩu. Hãy kiểm tra lại");
             if (loginAttempt >= 6) {
                 this.status = Status.LOCK;
                 this.lockTime = new Time(System.currentTimeMillis());
                 System.out.println("Tài khoản của bạn đã bị khoá. Sẽ mở lại sau: " + lockTime);
-                showAlert.showAlert("Thông báo", "Tài khoản của bạn đã bị khoá. Sẽ mở lại sau: " + lockTime);
             }
         }
         return false;

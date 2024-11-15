@@ -28,6 +28,7 @@ public class LoginController {
     @FXML
     private TextField password;
     private static List<TaiKhoan> taiKhoanList = new ArrayList<>();
+    private TaiKhoan currentAccount;
     static Scanner sc = new Scanner(System.in);
 
     @FXML
@@ -50,10 +51,11 @@ public class LoginController {
                     if (tk.checkLoginWithStatus(tenDangNhap, matKhau)) {
                         //Nếu tên tk là administrator thì chuyeenr đến trang chủ của admi
                         if ("administrator".equals(tenDangNhap)) {
-                            navigateToMainScreen("TrangChu.fxml");
+                            navigateToMainScreen("TrangChu.fxml", tk);
+                            System.out.println(tk);
                         } else {
                             //Ngược lại trên
-                            navigateToMainScreen("TrangChuNV.fxml");
+                            navigateToMainScreen("TrangChuNV.fxml", tk);
                         }
                     } else {
                         new ShowAlert().showAlert("Thông báo", "Tên đăng nhập hoặc mật khẩu không chính xác");
@@ -71,10 +73,19 @@ public class LoginController {
     //Điều hướng màn hình dựa trên STATUS của tài khoản
 
 
-    public void navigateToMainScreen(String xmlFile) {
+    public void navigateToMainScreen(String xmlFile, TaiKhoan account) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo/" + xmlFile));
             Parent mainRoot = fxmlLoader.load();
+            //Get controller của Home
+            if (account.getUsername().equals("administrator")){
+                HomeAdminController homeAdminController = fxmlLoader.getController();
+                homeAdminController.setCurrentAccount(account);
+            }
+            else {
+                TrangChuNVController trangChuNVController = fxmlLoader.getController();
+                trangChuNVController.setCurrentAccount(account);
+            }
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.setScene(new Scene(mainRoot, 921, 548));
         } catch (IOException e) {

@@ -5,7 +5,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="logout" prefHeight="552.0" prefWidth="921.0" style="-fx-border-color: grey;" stylesheets="@styleTrangChu.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.HomeController">
+<AnchorPane fx:id="trangChuAdmin" prefHeight="552.0" prefWidth="921.0" style="-fx-border-color: grey;" stylesheets="@styleTrangChu.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.HomeAdminController">
     <children>
         <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="176.0" style="-fx-border-color: grey;" styleClass="thanhmenu">
             <children>
