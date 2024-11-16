@@ -39,7 +39,7 @@ public class Donnhaphang implements Serializable {
     @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "IdTaiKhoan")
-    private Taikhoan taiKhoan;
+    private Taikhoan taiKhoanLapDonNhapHang;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "chiTietDonNhap_DonNhapHang", cascade = {CascadeType.REMOVE, CascadeType.DETACH, CascadeType.MERGE}, fetch = FetchType.EAGER)

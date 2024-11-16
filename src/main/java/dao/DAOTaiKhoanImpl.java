@@ -64,7 +64,7 @@ public class DAOTaiKhoanImpl extends UnicastRemoteObject implements DAOTaiKhoan 
 
             // Tạo truy vấn để lấy danh sách các đơn nhập hàng theo id tài khoản
             TypedQuery<Donnhaphang> query = entityManager.createQuery(
-                    "SELECT d FROM Donnhaphang d WHERE d.taiKhoan.id = :idTaiKhoan ORDER BY d.ngayTaoDon DESC", Donnhaphang.class);
+                    "SELECT d FROM Donnhaphang d WHERE d.taiKhoanLapDonNhapHang.id = :idTaiKhoan ORDER BY d.ngayTaoDon DESC", Donnhaphang.class);
             query.setParameter("idTaiKhoan", idTaiKhoan);
 
             // Cam kết giao dịch

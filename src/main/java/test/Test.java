@@ -184,10 +184,10 @@ public class Test {
     }
 
     public static void main(String[] args) {
-//        testGetAllDonnhaphang();
-//        testGetLoaiTraiCayList();
+        testGetAllDonnhaphang();
+//    testGetLoaiTraiCayList();
 //        testGetNhaCungCap();
-//        testCreateDonNhaHang();
+//       testCreateDonNhaHang();
 //        testGetDonNhapHangByFruitType();
 //        testGetBeforeReceivedRatioByFruitType();
         testGetAfterReceivedRatioByFruitType();
