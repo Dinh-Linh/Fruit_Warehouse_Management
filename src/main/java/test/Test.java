@@ -31,6 +31,21 @@ public class Test {
         }
     }
 
+    //Lấy toàn bộ tài khoản
+    private static void testGetAllTaikhoan(){
+        try{
+            DAOTaiKhoan daoTaiKhoan = new DAOTaiKhoanImpl();
+            ObservableList<Taikhoan> list = daoTaiKhoan.getAllTaiKhoan();
+            for(Taikhoan taikhoan : list){
+                System.out.println(taikhoan);
+            }
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
     //Kiểm tra lấy tất cả loại trái cây
     private static void testGetLoaiTraiCayList(){
         try{
@@ -159,6 +174,20 @@ public class Test {
         }
     }
 
+    //Kiểm tra đơn nhập hàng theo tài khoản
+    private static void testGetDonNhapHangByTaiKhoan(){
+        try{
+            DAODonNhapHang daoDonNhapHang = new DAODonNhapHangImpl();
+            ObservableList<Donnhaphang> list = daoDonNhapHang.getDonNhapHangByTaiKhoan("TK-00000001");
+            for (Donnhaphang d : list){
+                System.out.println(d);
+            }
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
     //Kiểm tra tổng kho trước khi nhập theo loại trái cây
     private static void testGetBeforeReceivedRatioByFruitType(){
         try{
@@ -184,12 +213,14 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        testGetAllDonnhaphang();
+        //       testGetAllDonnhaphang();
 //    testGetLoaiTraiCayList();
 //        testGetNhaCungCap();
 //       testCreateDonNhaHang();
 //        testGetDonNhapHangByFruitType();
 //        testGetBeforeReceivedRatioByFruitType();
+ //       testGetAllTaikhoan();
+        testGetDonNhapHangByTaiKhoan();
         testGetAfterReceivedRatioByFruitType();
         System.exit(0);
     }

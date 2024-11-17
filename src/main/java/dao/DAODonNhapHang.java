@@ -11,4 +11,5 @@ public interface DAODonNhapHang extends Remote {
     public boolean createDonNhapHang(Donnhaphang donNhapHang) throws RemoteException;
     public Donnhaphang getDonNhapHang(String maDN) throws RemoteException;
     public ObservableList<Donnhaphang> getDonNhapHangByFruitType(String maLoaiTC) throws RemoteException;
+    public ObservableList<Donnhaphang> getDonNhapHangByTaiKhoan(String idTaiKhoan) throws RemoteException;
 }

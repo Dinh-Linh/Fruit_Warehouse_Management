@@ -34,7 +34,7 @@ public class DAODonNhapHangImpl extends UnicastRemoteObject implements DAODonNha
         EntityTransaction transaction = entityManager.getTransaction();
         try{
             transaction.begin();
-            TypedQuery<Donnhaphang> query = entityManager.createQuery("select s from Donnhaphang s order by s.ngayTaoDon desc, s.tinhTrang desc ", Donnhaphang.class);
+            TypedQuery<Donnhaphang> query = entityManager.createQuery("select s from Donnhaphang s order by s.ngayTaoDon desc, s.tinhTrang desc", Donnhaphang.class);
             transaction.commit();
             return FXCollections.observableArrayList(query.getResultList());
         } catch (Exception e){
@@ -85,6 +85,35 @@ public class DAODonNhapHangImpl extends UnicastRemoteObject implements DAODonNha
             return FXCollections.observableArrayList(query.getResultList());
         } catch (Exception e){
             if(transaction.isActive()){
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            entityManager.close();
+        }
+        return null;
+    }
+    @Override
+    public ObservableList<Donnhaphang> getDonNhapHangByTaiKhoan(String idTaiKhoan) throws RemoteException {
+        this.entityManager = connectionStatic.getConnection();
+        EntityTransaction transaction = entityManager.getTransaction();
+
+        try {
+            transaction.begin();
+
+            // Tạo truy vấn để lấy danh sách các đơn nhập hàng theo id tài khoản
+            TypedQuery<Donnhaphang> query = entityManager.createQuery(
+                    "SELECT d FROM Donnhaphang d WHERE d.taiKhoanLapDonNhapHang.id = :idTaiKhoan ORDER BY d.ngayTaoDon DESC", Donnhaphang.class);
+            query.setParameter("idTaiKhoan", idTaiKhoan);
+
+            // Cam kết giao dịch
+            transaction.commit();
+
+            // Trả về danh sách dưới dạng ObservableList
+            return FXCollections.observableArrayList(query.getResultList());
+
+        } catch (Exception e) {
+            if (transaction.isActive()) {
                 transaction.rollback();
             }
             e.printStackTrace();

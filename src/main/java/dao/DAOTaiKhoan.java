@@ -15,5 +15,4 @@ public interface DAOTaiKhoan extends Remote {
 
     //Lấy toàn bộ danh sách tài khoản;
     public ObservableList<Taikhoan> getAllTaiKhoan() throws RemoteException;
-    public ObservableList<Donnhaphang> getDonNhapHangByTaiKhoan(String idTaiKhoan) throws RemoteException;
 }

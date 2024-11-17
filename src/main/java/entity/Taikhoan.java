@@ -2,13 +2,19 @@ package entity;
 
 import generator.IdTaiKhoanGenerator;
 import jakarta.persistence.*;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
 import java.sql.Date;
 import java.util.HashSet;
 import java.util.Set;
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@ToString
 @Entity
 @Table(name = "taikhoan")
 public class Taikhoan implements Serializable {
@@ -32,6 +38,7 @@ public class Taikhoan implements Serializable {
     private int loginAttempt;
 
     @Basic
+    @Enumerated(EnumType.STRING)
     @Column(name = "Status")
     private STATUS status;
 
@@ -50,11 +57,6 @@ public class Taikhoan implements Serializable {
     @Basic
     @Column(name = "RecoveryCode")
     private String recoveryCode;
-
-    @ToString.Exclude
-    @ManyToOne
-    @JoinColumn(name = "MaNCC")
-    private Nhacungcap nhaCungCapDonNhapHang;
 
     @ToString.Exclude
     @OneToMany(mappedBy = "taiKhoanLapDonNhapHang", cascade = CascadeType.ALL)
