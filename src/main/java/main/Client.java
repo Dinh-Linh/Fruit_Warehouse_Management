@@ -14,6 +14,7 @@ public class Client {
             DAOLoaiTraiCay ltc = (DAOLoaiTraiCay) registry.lookup("LoaiTraiCay");
             DAONhaCungCap ncc = (DAONhaCungCap) registry.lookup("NhaCungCap");
             DAOViTri vt = (DAOViTri) registry.lookup("ViTri");
+            DAOTaiKhoan tk = (DAOTaiKhoan) registry.lookup("TaiKhoan");
 
             System.out.println(vt.getBeforeReceivedRatioByFruitType("CA1"));
         } catch (Exception e){

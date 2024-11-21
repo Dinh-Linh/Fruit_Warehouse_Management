@@ -24,7 +24,6 @@ public class Taikhoan implements Serializable {
     @jakarta.persistence.Column(name = "IdTaiKhoan")
     private String idTaiKhoan;
 
-
     @Basic
     @Column(name = "Username")
     private String username;

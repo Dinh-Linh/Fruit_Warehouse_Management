@@ -13,11 +13,13 @@ public class Server {
             DAOLoaiTraiCay ltc = new DAOLoaiTraiCayImpl();
             DAONhaCungCap ncc = new DAONhaCungCapImpl();
             DAOViTri vt = new DAOViTriImpl();
+            DAOTaiKhoan tk = new DAOTaiKhoanImpl();
 
             registry.rebind("DonNhapHang", dnh);
             registry.rebind("LoaiTraiCay", ltc);
             registry.rebind("NhaCungCap", ncc);
             registry.rebind("ViTri", vt);
+            registry.rebind("TaiKhoan", tk);
             System.out.println("RMI server is running...");
         } catch (Exception e) {
             e.printStackTrace();

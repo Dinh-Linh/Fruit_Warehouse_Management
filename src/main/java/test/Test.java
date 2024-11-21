@@ -46,6 +46,57 @@ public class Test {
         }
     }
 
+    // Đăng nhập
+    private static void testLoGin(){
+        try{
+            DAOTaiKhoan daoTaiKhoan = new DAOTaiKhoanImpl();
+            boolean login = daoTaiKhoan.login("nhanvien002","@Aabcd1234569");
+            if (login){
+                System.out.println("Đăng nhập thành công");
+            }else {
+                System.out.println("Đăng nhập thất bại");
+            }
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+    //Đăng xuất
+    private static void testLogout(){
+        try{
+            DAOTaiKhoan daoTaiKhoan = new DAOTaiKhoanImpl();
+            boolean logout = daoTaiKhoan.logout("nhanvien002");
+            if (logout){
+                System.out.println("Đăng xuất thành công");
+            }else {
+                System.out.println("Đăng xuất thất bại");
+            }
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    //Đổi Mật khẩu
+    private static void testChangePW(){
+        try{
+            DAOTaiKhoan daoTaiKhoan = new DAOTaiKhoanImpl();
+            boolean newpw = daoTaiKhoan.changePassword("nhanvien002","21hjkddf@A");
+            if (newpw){
+                System.out.println("Đổi mật khẩu thành công");
+            }else {
+                System.out.println("Đổi mật khẩu thất bại");
+            }
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
     //Kiểm tra lấy tất cả loại trái cây
     private static void testGetLoaiTraiCayList(){
         try{
@@ -178,7 +229,7 @@ public class Test {
     private static void testGetDonNhapHangByTaiKhoan(){
         try{
             DAODonNhapHang daoDonNhapHang = new DAODonNhapHangImpl();
-            ObservableList<Donnhaphang> list = daoDonNhapHang.getDonNhapHangByTaiKhoan("TK-00000001");
+            ObservableList<Donnhaphang> list = daoDonNhapHang.getDonNhapHangByTaiKhoan("TK-00000004");
             for (Donnhaphang d : list){
                 System.out.println(d);
             }
@@ -213,15 +264,18 @@ public class Test {
     }
 
     public static void main(String[] args) {
-        //       testGetAllDonnhaphang();
-//    testGetLoaiTraiCayList();
+//        testGetAllDonnhaphang();
+//        testGetLoaiTraiCayList();
 //        testGetNhaCungCap();
-//       testCreateDonNhaHang();
+//        testCreateDonNhaHang();
 //        testGetDonNhapHangByFruitType();
 //        testGetBeforeReceivedRatioByFruitType();
- //       testGetAllTaikhoan();
-        testGetDonNhapHangByTaiKhoan();
-        testGetAfterReceivedRatioByFruitType();
+//        testGetAllTaikhoan();
+//        testGetDonNhapHangByTaiKhoan();
+//        testGetAfterReceivedRatioByFruitType();
+//       testLoGin();
+//        testLogout();
+        testChangePW();
         System.exit(0);
     }
 }
