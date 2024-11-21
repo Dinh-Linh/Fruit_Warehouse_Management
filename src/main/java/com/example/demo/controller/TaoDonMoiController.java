@@ -165,7 +165,7 @@ public class TaoDonMoiController {
 
     private void loadScene(String fxmlFile) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo/"+ fxmlFile));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo/" + fxmlFile));
             Parent root = fxmlLoader.load();
             Stage stage = (Stage) labelTrangChu.getScene().getWindow();
             stage.setScene(new Scene(root));
@@ -185,31 +185,48 @@ public class TaoDonMoiController {
             //Search Supplier
             DAONhaCungCap daoNhaCungCap = new DAONhaCungCapImpl();
             Nhacungcap nhacungcapObj = daoNhaCungCap.getNhaCungCap(ncc);
-            if (nhacungcapObj != null){
+            if (nhacungcapObj != null) {
                 donnhaphang.setNhaCungCapDonNhapHang(nhacungcapObj);
                 System.out.println(nhacungcapObj);
-            }
-            else {
+            } else {
                 System.out.println("Không tìm thấy nhà cung cấp với tên " + ncc);
             }
-            //Add details for DonNhapHang
             Set<Chitietdonnhap> chitietdonnhapSet = new HashSet<>();
             for (Traicay tc : tableDonNhap.getItems()) {
+                // Kiểm tra trạng thái của Traicay
+                if (tc.getMaTc() == null || tc.getLoaiTraiCay_TraiCay() == null || tc.getXuatXu() == null) {
+                    System.out.println("TraiCay chưa đầy đủ thông tin. Bỏ qua!");
+                    continue;
+                }
+
+                // Tạo ChitietdonnhapPK
+                ChitietdonnhapPK id = new ChitietdonnhapPK();
+                id.setMaDnCTDN(donnhaphang.getMaDn());
+                id.setMaTCCTDN(tc.getMaTc());
+
+                // Tạo Chitietdonnhap
                 Chitietdonnhap details = new Chitietdonnhap();
+                details.setId(id);
                 details.setTraiCay_DonNhapHang(tc);
                 details.setChiTietDonNhap_DonNhapHang(donnhaphang);
+
+                // Debug thông tin
+                System.out.println("ChiTietDonNhap: " + details);
+
                 chitietdonnhapSet.add(details);
             }
 
-            //Set chiTietDonNhap into DonNhapHang
+            // Set chiTietDonNhap vào Donnhaphang
             donnhaphang.setChiTietDonNhapSet(chitietdonnhapSet);
+
+            // Persist Donnhaphang
             DAODonNhapHang daoDonNhapHang = new DAODonNhapHangImpl();
-            if (daoDonNhapHang.createDonNhapHang(donnhaphang)){
+            if (daoDonNhapHang.createDonNhapHang(donnhaphang)) {
                 showAlert("Thông báo", "Đơn đã được tạo thành công.");
-            }
-            else {
+            } else {
                 showAlert("Thông báo", "Lỗi khi lưu");
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -247,18 +264,20 @@ public class TaoDonMoiController {
     }
 
     private void handleSaveAction() {
-        MaTCGenerator maTCGenerator = new MaTCGenerator();
         if (!checkField()) {
             showAlert("Thông báo", "Vui lòng nhập đầy đủ thông tin trái cây");
         }
 //        String maTC = maTCGenerator.getMaTC(tableDonNhap.getItems().get(1));
         String tenTC = fruitName.getText();
         String tinhTrang = comboBoxTinhTrang.getValue();
+        String loaiTc = comboBoxFruitType.getValue();
         String kichThuoc = comboBoxSize.getValue();
         Traicay fruit = Traicay.builder().tenTc(tenTC).tinhTrang(tinhTrang).size(kichThuoc).build();
 
         fruit.setLoaiTraiCay_TraiCay(Loaitraicay.builder().build());
-        fruit.setMaTc(maTCGenerator.getMaTC(fruit));
+        fruit.setMaTc(new MaTCGenerator().getMaTC(fruit));
+        System.out.println(new MaTCGenerator().getMaTC(fruit));
+        ;
         // Set Fruit into Table
         tableDonNhap.getItems().add(fruit);
         clearDataField();

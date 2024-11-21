@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import com.example.demo.constant.Status;
 import com.example.demo.entity.TaiKhoan;
 import com.example.demo.utils.ShowAlert;
 import com.example.demo.utils.Validator;
@@ -49,13 +50,19 @@ public class LoginController {
             if (validator.checkUsername(tenDangNhap) && validator.checkPassword(matKhau)) {
                 if (tk != null) {
                     if (tk.checkLoginWithStatus(tenDangNhap, matKhau)) {
-                        //Nếu tên tk là administrator thì chuyeenr đến trang chủ của admi
+                        //Nếu tên tk là administrator thì chuyeenr đến trang chủ của admin
                         if ("administrator".equals(tenDangNhap)) {
                             navigateToMainScreen("TrangChu.fxml", tk);
                             System.out.println(tk);
                         } else {
-                            //Ngược lại trên
-                            navigateToMainScreen("TrangChuNV.fxml", tk);
+                            if (tk.getStatus() == Status.FIRST) {
+                                new ShowAlert().showAlert("Thông báo", "Yêu cầu đổi mật khẩu trong lần đăng nhập đầu tiên");
+                                navigateToMainScreen("DoiMKNV.fxml", tk);
+                            } else {
+                                //Ngược lại trên
+                                navigateToMainScreen("TrangChuNV.fxml", tk);
+                                System.out.println(tk);
+                            }
                         }
                     } else {
                         new ShowAlert().showAlert("Thông báo", "Tên đăng nhập hoặc mật khẩu không chính xác");
@@ -71,18 +78,15 @@ public class LoginController {
     }
 
     //Điều hướng màn hình dựa trên STATUS của tài khoản
-
-
     public void navigateToMainScreen(String xmlFile, TaiKhoan account) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo/" + xmlFile));
             Parent mainRoot = fxmlLoader.load();
             //Get controller của Home
-            if (account.getUsername().equals("administrator")){
+            if (account.getUsername().equals("administrator")) {
                 HomeAdminController homeAdminController = fxmlLoader.getController();
                 homeAdminController.setCurrentAccount(account);
-            }
-            else {
+            } else {
                 TrangChuNVController trangChuNVController = fxmlLoader.getController();
                 trangChuNVController.setCurrentAccount(account);
             }

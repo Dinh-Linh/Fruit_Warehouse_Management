@@ -24,10 +24,11 @@ public class TrangChuNVController {
     private Button doiMk;
     @FXML
     private Button logout;
+
     @FXML
     public void initialize(){
         doiMk.setOnMouseClicked(event -> {
-            loadScene("DoiMKNV.fxml");
+            loadScene("DoiMKNV.fxml", currentAccount);
         });
         logout.setOnAction(actionEvent -> {
             handleLogout(actionEvent);
@@ -55,10 +56,12 @@ public class TrangChuNVController {
         }
     }
 
-    private void loadScene(String fxmlFile) {
+    private void loadScene(String fxmlFile, TaiKhoan account) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo/" + fxmlFile));
             Parent root = fxmlLoader.load();
+            DoiMkController doiMkController = fxmlLoader.getController();
+            doiMkController.setCurrentAccount(account);
             Stage stage = (Stage) labelTrangChu.getScene().getWindow();
             stage.setScene(new Scene(root, 921, 548));
         } catch (IOException e) {
