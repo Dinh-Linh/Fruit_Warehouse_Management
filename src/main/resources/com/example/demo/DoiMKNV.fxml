@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="548.0" prefWidth="921.0" style="-fx-background-color: #2A363F;" stylesheets="@styleTrangChuNV.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.DoiMkController">
+   <children>
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="176.0" style="-fx-border-color: grey;" styleClass="thanhmenu">
+         <children>
+            <Label fx:id="labelTrangChu" layoutX="3.0" layoutY="197.0" prefHeight="42.0" prefWidth="178.0" style="-fx-alignment: center;" styleClass="menu" text="Trang chủ" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label contentDisplay="CENTER" layoutX="5.0" layoutY="147.0" prefHeight="35.0" prefWidth="166.0" style="-fx-alignment: center;" text="Nhân Viên" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Bold" size="18.0" />
+               </font>
+            </Label>
+            <Line endX="-2.33331298828125" endY="0.414215087890625" layoutX="179.0" layoutY="190.0" startX="-179.0" startY="0.414215087890625" stroke="#363030" style="-fx-stroke: grey;" styleClass="ngancach" />
+            <Label fx:id="labelNhapHang" layoutX="3.0" layoutY="239.0" prefHeight="42.0" prefWidth="166.0" style="-fx-alignment: center;" styleClass="menu" text="Duyệt đơn" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="3.0" layoutY="281.0" prefHeight="42.0" prefWidth="166.0" style="-fx-alignment: center;" styleClass="menu" text=".........." textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="3.0" layoutY="323.0" prefHeight="42.0" prefWidth="166.0" style="-fx-alignment: center;" styleClass="menu" text="............." textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="3.0" layoutY="365.0" prefHeight="42.0" prefWidth="166.0" style="-fx-alignment: center;" styleClass="menu" text="........." textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Circle layoutX="88.0" layoutY="90.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="74.0" layoutY="81.0" text="Logo" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Button layoutX="44.0" layoutY="478.0" mnemonicParsing="false" styleClass="doiMW_btn" text="Đổi mật khẩu" />
+            <Button layoutX="52.0" layoutY="504.0" mnemonicParsing="false" prefHeight="12.0" prefWidth="70.0" styleClass="dangxuat_btn" text="Đăng xuất" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="191.0" layoutY="19.0" prefHeight="518.0" prefWidth="702.0" style="-fx-border-radius: 10; -fx-border-color: grey;" stylesheets="@DoiMK.css">
+         <children>
+            <Pane layoutX="76.0" layoutY="179.0" prefHeight="94.0" prefWidth="194.0">
+               <children>
+                  <Group layoutX="17.0" layoutY="15.0">
+                     <children>
+                        <Circle fill="#6dd89f" layoutY="6.1640625" radius="6.0" stroke="#b7b7b7" strokeType="INSIDE" />
+                        <Circle fill="#457666" layoutY="26.1640625" radius="6.0" stroke="#b7b7b7" strokeType="INSIDE" />
+                        <Circle fill="#5fb68c" layoutX="20.0" layoutY="6.1640625" radius="6.0" stroke="#b7b7b7" strokeType="INSIDE" />
+                        <Circle fill="#539778" layoutX="20.0" layoutY="26.1640625" radius="6.0" stroke="#b7b7b7" strokeType="INSIDE" />
+                        <Text fill="#fbfcfc" layoutX="39.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FAMILY">
+                           <font>
+                              <Font name="Century Gothic" size="28.0" />
+                           </font>
+                        </Text>
+                        <Text fill="#fbfcfc" layoutX="-4.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WAREHOUSE">
+                           <font>
+                              <Font name="Century Gothic" size="28.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Group>
+               </children>
+            </Pane>
+            <Line endX="160.0" layoutX="300.0" layoutY="239.0" rotate="90.0" startX="-100.0" startY="0.8468745946884155" stroke="#465058" strokeWidth="2.0" />
+            <PasswordField id="password_confirm" fx:id="reTypeNewPassword" layoutX="387.0" layoutY="239.0" prefHeight="41.0" prefWidth="248.0" promptText="Nhập lại mật khẩu mới" style="-fx-background-color: #2a363f; -fx-border-color: #465058;" styleClass="password">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </PasswordField>
+            <Button fx:id="confirm" layoutX="387.0" layoutY="336.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="114.0" styleClass="button_xacnhan" stylesheets="@DoiMK.css" text="XÁC NHẬN" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Text fill="#5fb68c" layoutX="415.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ĐỔI MẬT KHẨU ">
+               <font>
+                  <Font name="Arial Bold" size="25.0" />
+               </font>
+            </Text>
+            <PasswordField id="password_new" fx:id="newPassword" layoutX="387.0" layoutY="184.0" prefHeight="41.0" prefWidth="248.0" promptText="Mật khẩu mới" style="-fx-background-color: #2a363f; -fx-border-color: #465058;" styleClass="password">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </PasswordField>
+            <Button fx:id="cancel" layoutX="520.0" layoutY="336.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="114.0" styleClass="button_huy" stylesheets="@DoiMK.css" text="HỦY" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
+
+   </children>
+</AnchorPane>

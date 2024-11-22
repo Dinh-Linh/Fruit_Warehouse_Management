@@ -1,0 +1,40 @@
+.menu{
+    -fx-text-fill: white;
+    -fx-pref-heigt:50px;
+    -fx-pref-width: 170px;
+
+}
+.menu:hover{
+    -fx-background-color:#90ee90;
+}
+.thanhmenu{
+    -fx-background-color: linear-gradient(from 0% 0% to 0% 100%, #449D6B 0%, #633364 100%);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.25), 4, 0, 0, 4);
+}
+.ngancach{
+    -fx-stroke: white;
+}
+.label-tittle{
+    -fx-border: 1px;
+    -fx-border-style: solid;
+    -fx-border-color: #A5D6A7;
+}
+.label-color{
+    -fx-background-color: #A5D6A7;
+    -fx-background-radius:  0 10px 10px 0;
+    -fx-border: 1px 1px 1px 0;
+    -fx-border-color: #918E8E;
+}
+.label-nhap{
+    -fx-background-color: #449D6B;
+    -fx-background-radius:  10px 10px 0 0;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+.taomoibox {
+    -fx-background-radius: 32px;
+    -fx-background-color: #449D6B;
+    -fx-text-fill: white;
+}

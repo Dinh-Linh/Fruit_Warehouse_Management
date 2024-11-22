@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="trangChuAdmin" prefHeight="552.0" prefWidth="921.0" style="-fx-border-color: grey;" stylesheets="@styleTrangChu.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.HomeAdminController">
+    <children>
+        <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="176.0" style="-fx-border-color: grey;" styleClass="thanhmenu">
+            <children>
+                <Circle layoutX="88.0" layoutY="90.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+                <Line endX="-2.33331298828125" endY="0.414215087890625" startX="-179.0" startY="0.414215087890625" stroke="#363030" style="-fx-stroke: grey;" styleClass="ngancach" />
+                <Label fx:id="labelTrangChu" layoutX="3.0" layoutY="197.0" prefHeight="42.0" prefWidth="178.0" styleClass="menu" text="           Trang chủ" textAlignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label contentDisplay="CENTER" layoutX="5.0" layoutY="147.0" prefHeight="35.0" prefWidth="166.0" text="        CTY Fruit" textAlignment="CENTER" textFill="WHITE">
+                    <font>
+                        <Font name="SansSerif Bold" size="18.0" />
+                    </font>
+                </Label>
+                <Label fx:id="labelNhapHang" layoutX="3.0" layoutY="239.0" prefHeight="42.0" prefWidth="166.0" styleClass="menu" text="           Nhập hàng " textAlignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="3.0" layoutY="281.0" prefHeight="42.0" prefWidth="166.0" styleClass="menu" text="           Xuất hàng" textAlignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="3.0" layoutY="323.0" prefHeight="42.0" prefWidth="166.0" styleClass="menu" text="           Kho hàng" textAlignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="3.0" layoutY="365.0" prefHeight="42.0" prefWidth="166.0" styleClass="menu" text="           Nhân viên " textAlignment="CENTER">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="74.0" layoutY="81.0" text="Logo" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="14.0" />
+                    </font>
+                </Label>
+            <Button fx:id="dangXuat" layoutX="53.0" layoutY="488.0" mnemonicParsing="false" styleClass="dangxuat_btn" text="Đăng xuất" />
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>

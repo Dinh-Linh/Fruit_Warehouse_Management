@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="548.0" prefWidth="921.0" style="-fx-border-color: grey;" stylesheets="@styleTrangChuNV.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.demo.controller.TrangChuNVController">
+   <children>
+      <AnchorPane minHeight="-Infinity" minWidth="-Infinity" prefHeight="550.0" prefWidth="176.0" style="-fx-border-color: grey;" styleClass="thanhmenu">
+         <children>
+            <Label fx:id="labelTrangChu" layoutX="3.0" layoutY="197.0" prefHeight="42.0" prefWidth="178.0" style="-fx-alignment: center;" styleClass="menu" text="Trang chủ" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label contentDisplay="CENTER" layoutX="5.0" layoutY="147.0" prefHeight="35.0" prefWidth="166.0" style="-fx-alignment: center;" text="Nhân Viên" textAlignment="CENTER" textFill="WHITE">
+               <font>
+                  <Font name="SansSerif Bold" size="18.0" />
+               </font>
+            </Label>
+            <Line endX="-2.33331298828125" endY="0.414215087890625" layoutX="179.0" layoutY="190.0" startX="-179.0" startY="0.414215087890625" stroke="#363030" style="-fx-stroke: grey;" styleClass="ngancach" />
+            <Label fx:id="labelNhapHang" layoutX="3.0" layoutY="239.0" prefHeight="42.0" prefWidth="166.0" style="-fx-alignment: center;" styleClass="menu" text="Duyệt đơn" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="3.0" layoutY="281.0" prefHeight="42.0" prefWidth="166.0" style="-fx-alignment: center;" styleClass="menu" text=".........." textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="3.0" layoutY="323.0" prefHeight="42.0" prefWidth="166.0" style="-fx-alignment: center;" styleClass="menu" text="............." textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="3.0" layoutY="365.0" prefHeight="42.0" prefWidth="166.0" style="-fx-alignment: center;" styleClass="menu" text="........." textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Circle layoutX="88.0" layoutY="90.0" radius="48.0" stroke="BLACK" strokeType="INSIDE" />
+            <Label layoutX="74.0" layoutY="81.0" text="Logo" textFill="WHITE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+            <Button fx:id="doiMk" layoutX="44.0" layoutY="478.0" mnemonicParsing="false" styleClass="doiMW_btn" text="Đổi mật khẩu" />
+            <Button fx:id="logout" layoutX="52.0" layoutY="504.0" mnemonicParsing="false" prefHeight="12.0" prefWidth="70.0" styleClass="dangxuat_btn" text="Đăng xuất" />
+         </children>
+      </AnchorPane>
+      <AnchorPane id="dsdonnhap" layoutX="191.0" layoutY="19.0" prefHeight="518.0" prefWidth="702.0" style="-fx-border-radius: 10; -fx-border-color: grey;" />
+   </children>
+</AnchorPane>
