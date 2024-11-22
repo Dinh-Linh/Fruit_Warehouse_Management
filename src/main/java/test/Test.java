@@ -67,7 +67,7 @@ public class Test {
     private static void testLogout(){
         try{
             DAOTaiKhoan daoTaiKhoan = new DAOTaiKhoanImpl();
-            boolean logout = daoTaiKhoan.logout("nhanvien002");
+            boolean logout = daoTaiKhoan.logout("administrator");
             if (logout){
                 System.out.println("Đăng xuất thành công");
             }else {
@@ -264,6 +264,15 @@ public class Test {
         }
     }
 
+    private static Taikhoan testGetTk(String username){
+        try {
+            DAOTaiKhoan daoTaiKhoan = new DAOTaiKhoanImpl();
+            return daoTaiKhoan.getTaiKhoan(username);
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static void main(String[] args) {
 //        testGetAllDonnhaphang();
 //        testGetLoaiTraiCayList();
@@ -275,8 +284,9 @@ public class Test {
 //        testGetDonNhapHangByTaiKhoan();
 //        testGetAfterReceivedRatioByFruitType();
 //       testLoGin();
-//        testLogout();
-        testChangePW();
+        testLogout();
+//        testChangePW();
+        //System.out.println(testGetTk("administrator"));
         System.exit(0);
     }
 }

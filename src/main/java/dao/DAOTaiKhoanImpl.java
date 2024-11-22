@@ -48,6 +48,33 @@ public class DAOTaiKhoanImpl extends UnicastRemoteObject implements DAOTaiKhoan 
         return true;
     }
 
+    @Override
+    public Taikhoan getTaiKhoan(String username) throws RemoteException {
+        this.entityManager = connectionStatic.getConnection();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try {
+            transaction.begin();
+
+            // Truy vấn tài khoản theo username
+            TypedQuery<Taikhoan> query = entityManager.createQuery(
+                    "select t from Taikhoan t where t.username = :username", Taikhoan.class);
+            query.setParameter("username", username);
+
+            // Lấy kết quả
+            Taikhoan taiKhoan = query.getResultList().isEmpty() ? null : query.getSingleResult();
+
+            transaction.commit();
+            return taiKhoan; // Trả về đối tượng Taikhoan hoặc null nếu không tồn tại
+        } catch (Exception e) {
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+            throw new RemoteException("Lỗi khi lấy tài khoản", e);
+        }
+    }
+
+
     //Lấy toàn bộ danh sách tài khoản;
     @Override
     public List<Taikhoan> getAllTaiKhoan() throws RemoteException{
