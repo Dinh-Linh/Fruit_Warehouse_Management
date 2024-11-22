@@ -205,6 +205,9 @@ public class TaoDonMoiController {
             for (Traicay tc : tableDonNhap.getItems()) {
                 // Kiểm tra trạng thái của Traicay
                 if (tc.getMaTc() == null || tc.getLoaiTraiCay_TraiCay() == null || tc.getXuatXu() == null) {
+                    System.out.println(tc.getMaTc());
+                    System.out.println(tc.getLoaiTraiCay_TraiCay());
+                    tc.getXuatXu();
                     System.out.println("TraiCay chưa đầy đủ thông tin. Bỏ qua!");
                     continue;
                 }
@@ -281,12 +284,21 @@ public class TaoDonMoiController {
         String tinhTrang = comboBoxTinhTrang.getValue();
         String loaiTc = comboBoxFruitType.getValue();
         String kichThuoc = comboBoxSize.getValue();
-        Traicay fruit = Traicay.builder().tenTc(tenTC).tinhTrang(tinhTrang).size(kichThuoc).build();
-
-        fruit.setLoaiTraiCay_TraiCay(Loaitraicay.builder().build());
+        String xuatXu = fruitOrigin.getText();
+        Traicay fruit = Traicay.builder().tenTc(tenTC).tinhTrang(tinhTrang).size(kichThuoc).xuatXu(xuatXu).build();
+        try {
+            List<Loaitraicay> loaitraicayList = registryClass.loaiTraiCay().getLoaiTraiCayList();
+            for (Loaitraicay loaitraicay : loaitraicayList){
+                if (loaitraicay.getTenloaiTc().equalsIgnoreCase(loaiTc)) {
+                    fruit.setLoaiTraiCay_TraiCay(loaitraicay);
+                    break;
+                }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
         fruit.setMaTc(new MaTCGenerator().getMaTC(fruit));
         System.out.println(new MaTCGenerator().getMaTC(fruit));
-        ;
         // Set Fruit into Table
         tableDonNhap.getItems().add(fruit);
         clearDataField();
