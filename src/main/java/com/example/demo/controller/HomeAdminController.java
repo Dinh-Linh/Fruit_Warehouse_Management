@@ -66,7 +66,7 @@ public class HomeAdminController {
             if (results.isPresent() && results.get() == ButtonType.OK){
                 System.out.println("Đăng xuất thành công");
                 registryClass.taiKhoan().logout(currentAccount.getUsername());
-                UserSession.setUsername(null);
+                UserSession.setCurrentAccount(null);
                 System.out.println(currentAccount);
                 Platform.exit();
             }

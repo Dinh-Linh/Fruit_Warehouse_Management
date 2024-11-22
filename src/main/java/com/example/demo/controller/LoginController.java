@@ -50,7 +50,7 @@ public class LoginController {
                     Boolean login = registryClass.taiKhoan().login(tenDangNhap, matKhau);
                     if (login) {
                         currentAccount = registryClass.taiKhoan().getTaiKhoan(tenDangNhap);
-                        UserSession.setUsername(currentAccount.getUsername());
+                        UserSession.setCurrentAccount(currentAccount);
                         if ("administrator".equals(tenDangNhap)) {
                             navigateToMainScreen("TrangChu.fxml", currentAccount);
                         } else {

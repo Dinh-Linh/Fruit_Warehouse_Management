@@ -1,14 +1,16 @@
 package com.example.demo.entity;
 
-public class UserSession {
-    private static String username;
+import entity.Taikhoan;
 
-    public static String getUsername() {
-        return username;
+public class UserSession {
+    private static Taikhoan currentAccount;
+
+    public static Taikhoan getCurrentAccount() {
+        return currentAccount;
     }
 
-    public static void setUsername(String username) {
-        UserSession.username = username;
+    public static void setCurrentAccount(Taikhoan account) {
+        currentAccount = account;
     }
 }
 
