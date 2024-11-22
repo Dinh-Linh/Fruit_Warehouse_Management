@@ -10,7 +10,7 @@ import java.util.List;
 public interface DAOTaiKhoan extends Remote {
 
 
-    public boolean getTaiKhoan(String username, EntityManager entityManager) throws RemoteException;
+    public Taikhoan getTaiKhoan(String username) throws RemoteException;
 
     //Lấy toàn bộ danh sách tài khoản;
     public List<Taikhoan> getAllTaiKhoan() throws RemoteException;

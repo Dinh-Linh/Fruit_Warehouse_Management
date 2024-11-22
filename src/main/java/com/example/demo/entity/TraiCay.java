@@ -1,7 +1,12 @@
 package com.example.demo.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.math.BigDecimal;
 
+@Getter
+@Setter
 public class TraiCay {
     private String maTc;
     private String tenTc;

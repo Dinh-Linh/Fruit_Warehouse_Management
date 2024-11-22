@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.TaiKhoan;
 import com.example.demo.execute_field.ExecuteChangePassword;
+import entity.Taikhoan;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -12,7 +13,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class DoiMkController {
-    private TaiKhoan currentAccount;
+    private Taikhoan currentAccount;
     @FXML
     private Label labelTrangChu;
     @FXML
@@ -24,7 +25,7 @@ public class DoiMkController {
     @FXML
     private Button cancel;
 
-    public void setCurrentAccount(TaiKhoan currentAccount) {
+    public void setCurrentAccount(Taikhoan currentAccount) {
         this.currentAccount = currentAccount;
     }
 

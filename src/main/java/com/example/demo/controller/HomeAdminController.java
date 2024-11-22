@@ -1,6 +1,8 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.TaiKhoan;
+import com.example.demo.entity.UserSession;
+import entity.Taikhoan;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,8 +14,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import util.RegistryClass;
 
 import java.io.IOException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 import java.util.Optional;
 
 public class HomeAdminController {
@@ -22,10 +27,20 @@ public class HomeAdminController {
     private Label labelNhapHang;
     @FXML
     private Button dangXuat;
-    private TaiKhoan currentAccount;
+    private RegistryClass registryClass;
+    {
+        try {
+            registryClass = new RegistryClass();
+        } catch (RemoteException e) {
+            throw new RuntimeException(e);
+        } catch (NotBoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    private Taikhoan currentAccount;
 
-    public void setCurrentAccount(TaiKhoan account) {
-        this.currentAccount = account;
+    public void setCurrentAccount(Taikhoan currentAccount) {
+        this.currentAccount = currentAccount;
     }
 
     @FXML
@@ -35,10 +50,14 @@ public class HomeAdminController {
             loadScene("DonNhap.fxml");
         });
         dangXuat.setOnAction(actionEvent -> {
-            handleLogout(actionEvent);
+            try {
+                handleLogout(actionEvent);
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
         });
     }
-    public void handleLogout(ActionEvent event){
+    public void handleLogout(ActionEvent event) throws RemoteException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Xác nhận đăng xuất");
         alert.setHeaderText("Bạn có chắc chắn muốn đăng xuất");
@@ -46,7 +65,8 @@ public class HomeAdminController {
         if (currentAccount != null){
             if (results.isPresent() && results.get() == ButtonType.OK){
                 System.out.println("Đăng xuất thành công");
-                currentAccount.logout();
+                registryClass.taiKhoan().logout(currentAccount.getUsername());
+                UserSession.setUsername(null);
                 System.out.println(currentAccount);
                 Platform.exit();
             }
