@@ -11,7 +11,6 @@ module com.example.demo {
 
 
     opens entity to org.hibernate.orm.core, javafx.base;
-    opens generator to org.hibernate.orm.core;
 
     opens com.example.demo to javafx.fxml;
     exports com.example.demo.entity;

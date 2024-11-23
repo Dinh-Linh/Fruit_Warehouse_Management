@@ -1,6 +1,6 @@
 package entity;
 
-import generator.MaNCCGenerator;
+//import generator.MaNCCGenerator;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
