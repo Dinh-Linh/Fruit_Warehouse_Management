@@ -119,14 +119,15 @@ public class DonNhapController {
                             // Lấy đối tượng DSDonNhap từ dòng hiện tại
                             Donnhaphang dsDonNhap = getTableView().getItems().get(getIndex());
 
-                            // Kiểm tra kiểu dữ liệu và lấy mã đơn nhập từ DSDonNhap
+                            // Kiểm tra đối tượng là Donnhaphang, không phải Chitietdonnhap hay Traicay
                             if (dsDonNhap instanceof Donnhaphang) {
-                                String maDN = dsDonNhap.getMaDn();  // Giả sử getMaDN() là phương thức trả về mã đơn nhập
+                                String maDN = dsDonNhap.getMaDn();  // Lấy mã đơn nhập
+                                System.out.println(dsDonNhap.getMaDn());
 
-                                // Chuyển màn hình chi tiết đơn nhập với mã đơn nhập
-                                Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
-                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/ChiTietDon.fxml"));
                                 try {
+                                    // Chuyển màn hình chi tiết đơn nhập với mã đơn nhập
+                                    Stage stage = (Stage) ((Node) e.getSource()).getScene().getWindow();
+                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/demo/ChiTietDon.fxml"));
                                     Parent root = loader.load();
 
                                     // Truyền maDN tới controller của ChiTietDon.fxml
@@ -144,6 +145,7 @@ public class DonNhapController {
                         setGraphic(null);
                     }
                 }
+
             };
         }
     }

@@ -1,11 +1,10 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.TraiCay;
 import com.example.demo.utils.ShowAlert;
 import entity.Chitietdonnhap;
 import entity.Donnhaphang;
+import entity.Traicay;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,7 +12,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import util.RegistryClass;
 
@@ -32,19 +34,20 @@ public class ChiTietDonController {
     @FXML
     private TableView<Chitietdonnhap> chiTietDon;
     @FXML
-    private TableColumn<TraiCay, Integer> stt;
+    private TableColumn<Chitietdonnhap, Integer> stt;
     @FXML
-    private TableColumn<TraiCay, String> fruitName;
+    private TableColumn<Chitietdonnhap, String> size;
     @FXML
-    private TableColumn<TraiCay, String> size;
+    private TableColumn<Chitietdonnhap, String> origin;
     @FXML
-    private TableColumn<TraiCay, String> origin;
+    private TableColumn<Chitietdonnhap, String> status;
     @FXML
-    private TableColumn<TraiCay, String> status;
+    private TableColumn<Chitietdonnhap, String> priceImport;
     @FXML
-    private TableColumn<TraiCay, String> priceImport;
+    private TableColumn<Chitietdonnhap, String> priceExport;
     @FXML
-    private TableColumn<TraiCay, String> priceExport;
+    private TableColumn<Chitietdonnhap, String> fruitName;
+
     private RegistryClass registryClass;
     {
         try {
@@ -83,12 +86,12 @@ public class ChiTietDonController {
 
                 // Liên kết cột với dữ liệu
                 stt.setCellValueFactory(cellData -> new SimpleIntegerProperty(cellData.getTableView().getItems().indexOf(cellData.getValue()) + 1).asObject());
-                fruitName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTenTc()));
-                size.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getSize()));
-                origin.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getXuatXu()));
-                status.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTinhTrang()));
-                priceImport.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getGiaNhap())));
-                priceExport.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getGiaXuat())));
+                fruitName.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTraiCay_DonNhapHang().getTenTc()));
+                size.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTraiCay_DonNhapHang().getSize()));
+                origin.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTraiCay_DonNhapHang().getXuatXu()));
+                status.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTraiCay_DonNhapHang().getTinhTrang()));
+                priceImport.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getTraiCay_DonNhapHang().getGiaNhap())));
+                priceExport.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().getTraiCay_DonNhapHang().getGiaXuat())));
             } else {
                 new ShowAlert().showAlert("Thông báo", "Không tìm thấy đơn nhập hàng!");
             }

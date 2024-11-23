@@ -2,10 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.TraiCay;
 import com.example.demo.utils.Validator;
-import dao.DAODonNhapHang;
-import dao.DAONhaCungCap;
 import entity.*;
-//import generator.MaTCGenerator;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
