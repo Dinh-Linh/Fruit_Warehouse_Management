@@ -1,5 +1,7 @@
 package entity;
 
+//import generator.MaNCCGenerator;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.io.Serializable;

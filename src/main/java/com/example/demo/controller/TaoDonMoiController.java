@@ -5,7 +5,7 @@ import com.example.demo.utils.Validator;
 import dao.DAODonNhapHang;
 import dao.DAONhaCungCap;
 import entity.*;
-import generator.MaTCGenerator;
+//import generator.MaTCGenerator;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -119,7 +119,7 @@ public class TaoDonMoiController {
 
         //Set value Fruit Field for ComboBox
         comboBoxSize.getItems().addAll("S", "M", "L", "XL", "XXL");
-        comboBoxFruitType.getItems().addAll("Xoài Cát Chu", "Loại 1", "Loại 2", "Loại 3");
+        comboBoxFruitType.getItems().addAll("Xoài Cát Chu","Loại 1", "Loại 2", "Loại 3");
         comboBoxTinhTrang.getItems().addAll("Chín", "Chưa chín", "Sắp chín");
         importDate.setText(new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date()));
 
@@ -202,13 +202,16 @@ public class TaoDonMoiController {
             Set<Chitietdonnhap> chitietdonnhapSet = new HashSet<>();
             for (Traicay tc : tableDonNhap.getItems()) {
                 // Kiểm tra trạng thái của Traicay
-                /*if (tc.getMaTc() == null || tc.getLoaiTraiCay_TraiCay() == null || tc.getXuatXu() == null) {
+                if (tc.getMaTc() == null || tc.getLoaiTraiCay_TraiCay() == null || tc.getXuatXu() == null) {
                     System.out.println(tc.getMaTc());
                     System.out.println(tc.getLoaiTraiCay_TraiCay());
                     tc.getXuatXu();
-                    System.out.println("TraiCay chưa đầy đủ thông tin. Bỏ qua!");
-                    continue;
-                }*/
+
+                    /*FIX - 23/11/2024*/
+//                    System.out.println("TraiCay chưa đầy đủ thông tin. Bỏ qua!");
+//                    continue;
+                    System.out.println("Kiểm tra từ nút Lưu đơn nhập không kiểm tra tại đây.\nKhông cần set generator.");
+                }
 
                 // Tạo ChitietdonnhapPK
                 ChitietdonnhapPK id = new ChitietdonnhapPK();
@@ -284,19 +287,26 @@ public class TaoDonMoiController {
         String loaiTc = comboBoxFruitType.getValue();
         String kichThuoc = comboBoxSize.getValue();
         String xuatXu = fruitOrigin.getText();
-//        Traicay fruit = Traicay.builder().tenTc(tenTC).tinhTrang(tinhTrang).size(kichThuoc).xuatXu(xuatXu).build();
+
+        /*FIX - 23/11/2024*/
         Traicay fruit = Traicay.builder().tenTc(tenTC).tinhTrang(tinhTrang).size(kichThuoc).xuatXu(xuatXu)
-                .giaXuat(BigDecimal.valueOf(Double.parseDouble(fruitPriceImport.getText()))).giaNhap(BigDecimal.valueOf(Double.parseDouble(fruitPriceImport.getText()))).build();
+                .giaXuat(BigDecimal.valueOf(Double.parseDouble(fruitPriceExport.getText())))
+                .giaNhap(BigDecimal.valueOf(Double.parseDouble(fruitPriceImport.getText()))).build();
+
+
+        System.out.println("Flag1");
         try {
             List<Loaitraicay> loaitraicayList = registryClass.loaiTraiCay().getLoaiTraiCayList();
             for (Loaitraicay loaitraicay : loaitraicayList) {
                 if (loaitraicay.getTenloaiTc().equalsIgnoreCase(loaiTc)) {
                     fruit.setLoaiTraiCay_TraiCay(loaitraicay);
+                    System.out.println("Flag2");
                     System.out.println(loaitraicay);
                     break;
                 }
             }
         } catch (Exception e) {
+            System.out.println("Flag3");
             e.printStackTrace();
         }
 //        fruit.setMaTc(new MaTCGenerator().getMaTC(fruit));
