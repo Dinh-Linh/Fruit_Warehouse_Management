@@ -27,6 +27,7 @@ public class TaoDonMoiController {
     Validator validator = new Validator();
 
     private RegistryClass registryClass;
+
     {
         try {
             registryClass = new RegistryClass();
@@ -36,6 +37,7 @@ public class TaoDonMoiController {
             throw new RuntimeException(e);
         }
     }
+
     @FXML
     private Label labelTrangChu;
     @FXML
@@ -191,16 +193,12 @@ public class TaoDonMoiController {
             String ncc = supplier.getText();
             java.sql.Date ngayTaoDon = new java.sql.Date(new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).parse(importDate.getText()).getTime());
             String trangThai = "Đang xử lý";
-            Donnhaphang donnhaphang = Donnhaphang.builder().ngayTaoDon(ngayTaoDon).tinhTrang(trangThai).build();
+            Double soLuong = Double.parseDouble(fruitQuantity.getText());
 
             //Search Supplier
             Nhacungcap nhacungcapObj = registryClass.nhaCungCap().getNhaCungCap(ncc);
-            if (nhacungcapObj != null) {
-                donnhaphang.setNhaCungCapDonNhapHang(nhacungcapObj);
-                System.out.println(nhacungcapObj);
-            } else {
-                System.out.println("Không tìm thấy nhà cung cấp với tên " + ncc);
-            }
+            //Tạo mới đơn
+            Donnhaphang donnhaphang = Donnhaphang.builder().ngayTaoDon(ngayTaoDon).nhaCungCapDonNhapHang(nhacungcapObj).tinhTrang(trangThai).build();
             Set<Chitietdonnhap> chitietdonnhapSet = new HashSet<>();
             for (Traicay tc : tableDonNhap.getItems()) {
                 // Kiểm tra trạng thái của Traicay
@@ -221,17 +219,18 @@ public class TaoDonMoiController {
                 Chitietdonnhap details = new Chitietdonnhap();
                 details.setId(id);
                 details.setTraiCay_DonNhapHang(tc);
+                details.setSoLuong(soLuong);
                 details.setChiTietDonNhap_DonNhapHang(donnhaphang);
 
+                Chitietdonnhap dt2 = Chitietdonnhap.builder().soLuong(soLuong).traiCay_DonNhapHang(tc).build();
                 // Debug thông tin
-                System.out.println("ChiTietDonNhap: " + details);
-
-                chitietdonnhapSet.add(details);
+                System.out.println("ChiTietDonNhap: " + dt2);
+                chitietdonnhapSet.add(dt2);
+//                chitietdonnhapSet.add(details);
             }
 
             // Set chiTietDonNhap vào Donnhaphang
             donnhaphang.setChiTietDonNhapSet(chitietdonnhapSet);
-
             // Persist Donnhaphang
             if (registryClass.donNhapHang().createDonNhapHang(donnhaphang)) {
                 showAlert("Thông báo", "Đơn đã được tạo thành công.");
@@ -288,13 +287,13 @@ public class TaoDonMoiController {
         Traicay fruit = Traicay.builder().tenTc(tenTC).tinhTrang(tinhTrang).size(kichThuoc).xuatXu(xuatXu).build();
         try {
             List<Loaitraicay> loaitraicayList = registryClass.loaiTraiCay().getLoaiTraiCayList();
-            for (Loaitraicay loaitraicay : loaitraicayList){
+            for (Loaitraicay loaitraicay : loaitraicayList) {
                 if (loaitraicay.getTenloaiTc().equalsIgnoreCase(loaiTc)) {
                     fruit.setLoaiTraiCay_TraiCay(loaitraicay);
                     break;
                 }
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         fruit.setMaTc(new MaTCGenerator().getMaTC(fruit));
@@ -308,7 +307,6 @@ public class TaoDonMoiController {
         // Xóa nội dung nhập sau khi lưu thành công
         fruitName.clear();
         fruitOrigin.clear();
-        fruitQuantity.clear();
         fruitPriceImport.clear();
         fruitPriceExport.clear();
         fruitDVT.clear();
