@@ -40,3 +40,9 @@
 #buttonChiTiet:hover {
 	-fx-background-color: #257EF3;
 }
+.phantram-text {
+	-fx-text-fill: white; /* Màu chữ */
+	-fx-font-size: 14px; /* Kích thước chữ */
+	-fx-font-weight: bold; /* Đậm chữ */
+	-fx-alignment: center; /* Căn giữa nội dung */
+}

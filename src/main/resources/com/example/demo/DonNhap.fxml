@@ -76,21 +76,23 @@
                     </font>
                 </Label>
                 <ComboBox fx:id="comboBoxLoaiTraiCay" layoutX="531.0" layoutY="15.0" prefWidth="150.0" />
-                <AnchorPane layoutX="17.0" layoutY="89.0" prefHeight="42.0" prefWidth="170.0" style="-fx-background-color: grey; -fx-background-radius: 0 10 10 0;">
-               <children>
-                        <Label fx:id="truocKhiNhap" layoutX="6.0" prefHeight="42.0" prefWidth="194.0" styleClass="phantram-text" text="Kho hàng còn % không gian " />
-               </children>
-                </AnchorPane>
+                <!-- Tỷ lệ trước khi nhập -->
+                <StackPane layoutX="17.0" layoutY="89.0" prefHeight="42.0" prefWidth="288.0" style="-fx-background-color: grey; -fx-background-radius: 0 10 10 0;">
+                    <children>
+                        <Label fx:id="truocKhiNhap" maxWidth="Infinity" maxHeight="Infinity" style="-fx-padding: 10px" styleClass="phantram-text" text="Kho hàng còn % không gian" />
+                    </children>
+                </StackPane>
                 <AnchorPane layoutX="556.0" layoutY="46.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="125.0" style="-fx-border-radius: 10 0 0 10; -fx-border-color: #918E8E;" styleClass="label-tittle">
                <children>
                       <AnchorPane layoutX="-1.0" layoutY="-1.0" prefHeight="31.0" prefWidth="30.0" style="-fx-border-radius: 10 0 0 10; -fx-background-radius: 10 0 0 10;" styleClass="label-color" />
                </children>
                 </AnchorPane>
-                <AnchorPane layoutX="503.0" layoutY="89.0" prefHeight="42.0" prefWidth="178.0" style="-fx-background-color: grey; -fx-background-radius: 10 0 0 10;">
+                <!-- Tỷ lệ sau khi nhập -->
+                <StackPane layoutX="393.0" layoutY="89.0" prefHeight="42.0" prefWidth="288.0" style="-fx-background-color: grey; -fx-background-radius: 10 0 0 10;">
                     <children>
-                        <Label fx:id="sauKhiNhap" layoutX="10.0" layoutY="11.0" prefHeight="20.0" prefWidth="158.0" text="Kho hàng còn % không gian " />
+                        <Label fx:id="sauKhiNhap" maxWidth="Infinity" maxHeight="Infinity" style="-fx-padding: 10px" styleClass="phantram-text" text="Kho hàng còn % không gian" />
                     </children>
-                </AnchorPane>
+                </StackPane>
                 <TableView fx:id="tableDSDonNhap" layoutX="8.0" layoutY="146.0" minWidth="-Infinity" prefHeight="325.0" prefWidth="681.0">
                     <columns>
                         <TableColumn fx:id="colIdDon" prefWidth="154.0" text="ID đơn " />

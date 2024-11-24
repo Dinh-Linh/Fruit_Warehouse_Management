@@ -71,9 +71,14 @@ public class DonNhapController {
         labelTrangChu.setOnMouseClicked(event -> {
             loadScene("TrangChu.fxml");
         });
-        comboBoxLoaiTraiCay.setValue("Loại 1");
+        comboBoxLoaiTraiCay.setValue("Na Bồ Lý");
         updateWarehouseStatus(comboBoxLoaiTraiCay.getValue());
-
+        comboBoxLoaiTraiCay.setOnAction(event -> {
+            String selectedLoai = comboBoxLoaiTraiCay.getValue();
+            if (selectedLoai != null){
+                updateWarehouseStatus(selectedLoai);
+            }
+        });
 
 //        tableDSDonNhap.setItems(data);
         setUpTableCol();
@@ -95,7 +100,7 @@ public class DonNhapController {
     private void setUpComboBox() {
         // Thêm các loại trái cây phổ biến vào ComboBox
         ObservableList<String> options = FXCollections.observableArrayList(
-                "Loại 1", "Loại 2", "Loại 3"
+                "Loại 1", "Loại 2", "Loại 3", "Na Bồ Lý"
         );
         comboBoxLoaiTraiCay.setItems(options);
     }
@@ -193,14 +198,15 @@ public class DonNhapController {
             for (Loaitraicay loaitraicay : loaitraicayList) {
                 if (loaitraicay.getTenloaiTc().equalsIgnoreCase(tenLoaiTc)) {
                     maLoaiTc = loaitraicay.getMaloaiTc();
+                    System.out.println(maLoaiTc);
                     break;
                 }
             }
             float beforeRatio = registryClass.viTri().getBeforeReceivedRatioByFruitType(maLoaiTc);
             float afterRatio = registryClass.viTri().getAfterReceivedRatioByFruitType(maLoaiTc);
             System.out.println(beforeRatio + " " + afterRatio);
-            truocKhiNhap.setText(String.format("Kho hàng còn %.2f%% không gian"));
-            sauKhiNhap.setText(String.format("Kho hàng còn %.2f%% không gian"));
+            truocKhiNhap.setText(String.format("Kho hàng còn %.2f%% không gian", beforeRatio));
+            sauKhiNhap.setText(String.format("Kho hàng còn %.2f%% không gian", afterRatio));
             setLabelColor(truocKhiNhap, beforeRatio);
             setLabelColor(sauKhiNhap, afterRatio);
         }catch (Exception e){
