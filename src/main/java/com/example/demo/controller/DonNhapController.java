@@ -4,6 +4,7 @@ import com.example.demo.entity.DSDonNhap;
 import dao.DAODonNhapHang;
 import entity.Chitietdonnhap;
 import entity.Donnhaphang;
+import entity.Loaitraicay;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -44,6 +45,10 @@ public class DonNhapController {
     private TableColumn<Donnhaphang, String> colTrangThai;
     @FXML
     private TableColumn<Donnhaphang, Button> colThongTin;
+    @FXML
+    private Label truocKhiNhap;
+    @FXML
+    private Label sauKhiNhap;
     private RegistryClass registryClass;
     {
         try {
@@ -66,6 +71,9 @@ public class DonNhapController {
         labelTrangChu.setOnMouseClicked(event -> {
             loadScene("TrangChu.fxml");
         });
+        comboBoxLoaiTraiCay.setValue("Loại 1");
+        updateWarehouseStatus(comboBoxLoaiTraiCay.getValue());
+
 
 //        tableDSDonNhap.setItems(data);
         setUpTableCol();
@@ -163,6 +171,39 @@ public class DonNhapController {
                 System.out.println("Danh sách đơn nhập hàng trống");
             } else System.out.println(donnhaphangs);
         } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Phương thức đổi màu theo trạng thái
+    private void setLabelColor(Label label, float ratio) {
+        if (ratio < 2) {
+            label.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+        } else if (ratio >= 2 && ratio <= 20) {
+            label.setStyle("-fx-background-color: yellow; -fx-text-fill: black;");
+        } else {
+            label.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+        }
+    }
+
+    private void updateWarehouseStatus(String tenLoaiTc){
+        try {
+            String maLoaiTc = "";
+            List<Loaitraicay> loaitraicayList = registryClass.loaiTraiCay().getLoaiTraiCayList();
+            for (Loaitraicay loaitraicay : loaitraicayList) {
+                if (loaitraicay.getTenloaiTc().equalsIgnoreCase(tenLoaiTc)) {
+                    maLoaiTc = loaitraicay.getMaloaiTc();
+                    break;
+                }
+            }
+            float beforeRatio = registryClass.viTri().getBeforeReceivedRatioByFruitType(maLoaiTc);
+            float afterRatio = registryClass.viTri().getAfterReceivedRatioByFruitType(maLoaiTc);
+            System.out.println(beforeRatio + " " + afterRatio);
+            truocKhiNhap.setText(String.format("Kho hàng còn %.2f%% không gian"));
+            sauKhiNhap.setText(String.format("Kho hàng còn %.2f%% không gian"));
+            setLabelColor(truocKhiNhap, beforeRatio);
+            setLabelColor(sauKhiNhap, afterRatio);
+        }catch (Exception e){
             e.printStackTrace();
         }
     }
