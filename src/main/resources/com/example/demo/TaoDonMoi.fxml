@@ -156,25 +156,18 @@
                         <TableColumn fx:id="clTinhTrangTc" prefWidth="101.0" text="Tình trạng" />
                      </columns>
                   </TableView>
-                  <Label layoutX="14.0" layoutY="294.0" text="Thành tiền      :">
+                  <Label layoutX="14.0" layoutY="295.0" text="Nhà cung cấp :">
                      <font>
                         <Font name="System Bold" size="12.0" />
                      </font>
                   </Label>
-                  <Label layoutX="14.0" layoutY="334.0" text="Nhà cung cấp :">
-                     <font>
-                        <Font name="System Bold" size="12.0" />
-                     </font>
-                  </Label>
-                  <Label fx:id="total" layoutX="105.0" layoutY="294.0" prefHeight="17.0" prefWidth="153.0" text="None" />
-                  <TextField fx:id="supplier" layoutX="105.0" layoutY="329.0" prefHeight="26.0" prefWidth="238.0" />
-                  <Button fx:id="btnTaoDon" layoutX="142.0" layoutY="394.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="141.0" styleClass="taomoibox" text="Tạo đơn" textFill="WHITE">
+                  <TextField fx:id="supplier" layoutX="105.0" layoutY="291.0" prefHeight="26.0" prefWidth="238.0" />
+                  <Button fx:id="btnTaoDon" layoutX="115.0" layoutY="391.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="141.0" styleClass="taomoibox" text="Tạo đơn" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Button>
                   <TextField fx:id="importDate" layoutX="98.0" layoutY="39.0" />
-                  <Label layoutX="270.0" layoutY="294.0" text="VND" />
                </children>
             </AnchorPane>
          </children></AnchorPane>
