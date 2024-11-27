@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.TaiKhoan;
+import com.example.demo.utils.CurrentAccount;
 import entity.Taikhoan;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -61,10 +62,10 @@ public class TrangChuNVController {
         alert.setTitle("Xác nhận đăng xuất");
         alert.setHeaderText("Bạn có chắc chắn muốn đăng xuất");
         Optional<ButtonType> results = alert.showAndWait();
-        if (currentAccount != null){
+        if (CurrentAccount.taikhoan != null){
             if (results.isPresent() && results.get() == ButtonType.OK){
                 System.out.println("Đăng xuất thành công");
-                registryClass.taiKhoan().logout(currentAccount.getUsername());
+                registryClass.taiKhoan().logout(CurrentAccount.taikhoan.getUsername());
                 System.out.println(currentAccount);
                 Platform.exit();
             }

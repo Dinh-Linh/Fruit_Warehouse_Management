@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.entity.TaiKhoan;
 import com.example.demo.entity.UserSession;
+import com.example.demo.utils.CurrentAccount;
 import com.example.demo.utils.ShowAlert;
 import com.example.demo.utils.Validator;
 import entity.Taikhoan;
@@ -78,6 +79,7 @@ public class LoginController {
             if (currentAccount.getUsername().equals("administrator")) {
                 HomeAdminController homeAdminController = fxmlLoader.getController();
                 homeAdminController.setCurrentAccount(currentAccount);
+                CurrentAccount.taikhoan = currentAccount;
             } else {
                 TrangChuNVController trangChuNVController = fxmlLoader.getController();
                 trangChuNVController.setCurrentAccount(currentAccount);
