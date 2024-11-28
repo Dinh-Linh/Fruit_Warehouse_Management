@@ -112,6 +112,7 @@ public class DAOTaiKhoanImpl extends UnicastRemoteObject implements DAOTaiKhoan 
                     // Reset loginAttempt về 0 khi đăng nhập thành công
                     taikhoan.setLoginAttempt(0);
                     taikhoan.setStatus(STATUS.ON);
+                    entityManager.merge(taikhoan);
                     transaction.commit();
                     return taikhoan;
                 }

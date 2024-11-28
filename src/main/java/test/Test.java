@@ -51,7 +51,7 @@ public class Test {
     private static void testLoGin(){
         try{
             DAOTaiKhoan daoTaiKhoan = new DAOTaiKhoanImpl();
-            Taikhoan tk = daoTaiKhoan.login("nhanvien002","21hjkddf@A12234");
+            Taikhoan tk = daoTaiKhoan.login("nhanvien002","@Aabcd1234567");
             if (tk != null && tk.getLoginAttempt()==0){
                 System.out.println("Đăng nhập thành công");
             }else {
@@ -274,8 +274,8 @@ public class Test {
 //        testGetAllTaikhoan();
 //        testGetDonNhapHangByTaiKhoan();
 //        testGetAfterReceivedRatioByFruitType();
- //     testLoGin();
-       testLogout();
+      testLoGin();
+   //    testLogout();
   //      testChangePW();
         System.exit(0);
     }
