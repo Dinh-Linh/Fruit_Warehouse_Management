@@ -67,7 +67,7 @@ public class Test {
     private static void testLogout(){
         try{
             DAOTaiKhoan daoTaiKhoan = new DAOTaiKhoanImpl();
-            boolean logout = daoTaiKhoan.logout("nhanvien002");
+            boolean logout = daoTaiKhoan.logout("administrator");
             if (logout){
                 System.out.println("Đăng xuất thành công");
             }else {
@@ -274,8 +274,8 @@ public class Test {
 //        testGetAllTaikhoan();
 //        testGetDonNhapHangByTaiKhoan();
 //        testGetAfterReceivedRatioByFruitType();
-      testLoGin();
-  //     testLogout();
+ //     testLoGin();
+       testLogout();
   //      testChangePW();
         System.exit(0);
     }

@@ -28,7 +28,8 @@ public class DAOTaiKhoanImpl extends UnicastRemoteObject implements DAOTaiKhoan 
 
     //Kiểm tra tài khoản có tồn tại hay không theo username
     @Override
-    public Taikhoan getTaiKhoan(String username, EntityManager entityManager) throws RemoteException {
+    public Taikhoan getTaiKhoan(String username) throws RemoteException {
+        this.entityManager = connectionStatic.getConnection();
         EntityTransaction transaction = entityManager.getTransaction();
         try {
             transaction.begin();
