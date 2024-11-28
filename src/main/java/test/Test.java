@@ -50,8 +50,8 @@ public class Test {
     private static void testLoGin(){
         try{
             DAOTaiKhoan daoTaiKhoan = new DAOTaiKhoanImpl();
-            boolean login = daoTaiKhoan.login("nhanvien002","@Aabcd1234569");
-            if (login){
+            Taikhoan tk = daoTaiKhoan.login("nhanvien002","21hjkddf@A12234");
+            if (tk != null && tk.getLoginAttempt()==0){
                 System.out.println("Đăng nhập thành công");
             }else {
                 System.out.println("Đăng nhập thất bại");
@@ -83,7 +83,7 @@ public class Test {
     private static void testChangePW(){
         try{
             DAOTaiKhoan daoTaiKhoan = new DAOTaiKhoanImpl();
-            boolean newpw = daoTaiKhoan.changePassword("nhanvien002","21hjkddf@A");
+            boolean newpw = daoTaiKhoan.changePassword("nhanvien002","21hjkddf@A12234");
             if (newpw){
                 System.out.println("Đổi mật khẩu thành công");
             }else {
@@ -273,9 +273,9 @@ public class Test {
 //        testGetAllTaikhoan();
 //        testGetDonNhapHangByTaiKhoan();
 //        testGetAfterReceivedRatioByFruitType();
-//       testLoGin();
-//        testLogout();
-        testChangePW();
+      testLoGin();
+  //     testLogout();
+  //      testChangePW();
         System.exit(0);
     }
 }
