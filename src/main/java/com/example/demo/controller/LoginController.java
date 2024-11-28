@@ -51,7 +51,10 @@ public class LoginController {
             //Check username và password đúng định dạng
             if (validator.checkUsername(tenDangNhap) && validator.checkPassword(matKhau)) {
                 try {
-                    Taikhoan login = registryClass.taiKhoan().login(tenDangNhap, matKhau);
+                    /*FIX 28/11/2024*/
+//                    Taikhoan login = registryClass.taiKhoan().login(tenDangNhap, matKhau);
+                    
+                    Taikhoan login = registryClass.taiKhoan().getTaiKhoan(tenDangNhap);
                     System.out.println(login);
 
                     if (login != null) {
@@ -60,7 +63,10 @@ public class LoginController {
                                 new ShowAlert().showAlert("Thông báo", "Bạn đã nhập sai mật khẩu. Vui lòng kiểm tra lại");
                             }
                         } else {
-                            currentAccount = registryClass.taiKhoan().getTaiKhoan(tenDangNhap);
+
+                            /*FIX 28/11/2024*/
+//                            currentAccount = registryClass.taiKhoan().getTaiKhoan(tenDangNhap);
+                            currentAccount = registryClass.taiKhoan().login(tenDangNhap, matKhau);
                             UserSession.setCurrentAccount(currentAccount);
                             switch (login.getStatus()) {
                                 case OFF -> {
