@@ -5,8 +5,9 @@ import javafx.collections.ObservableList;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 public interface DAOLoaiTraiCay extends Remote {
-    public ObservableList<Loaitraicay> getLoaiTraiCayList() throws RemoteException;
+    public List<Loaitraicay> getLoaiTraiCayList() throws RemoteException;
     public Loaitraicay getLoaiTraiCay(String maLoaiTC) throws RemoteException;
 }

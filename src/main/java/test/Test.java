@@ -13,6 +13,7 @@ import java.rmi.RemoteException;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Test {
@@ -20,7 +21,7 @@ public class Test {
     private static void testGetAllDonnhaphang(){
         try{
             DAODonNhapHang daoDonNhapHang = new DAODonNhapHangImpl();
-            ObservableList<Donnhaphang> list = daoDonNhapHang.getAllDonnhaphang();
+            List<Donnhaphang> list = daoDonNhapHang.getAllDonnhaphang();
             for(Donnhaphang donnhaphang : list){
                 System.out.println(donnhaphang);
             }
@@ -101,7 +102,7 @@ public class Test {
     private static void testGetLoaiTraiCayList(){
         try{
             DAOLoaiTraiCay daoLoaiTraiCay = new DAOLoaiTraiCayImpl();
-            ObservableList<Loaitraicay> list = daoLoaiTraiCay.getLoaiTraiCayList();
+            List<Loaitraicay> list = daoLoaiTraiCay.getLoaiTraiCayList();
             for(Loaitraicay item : list){
                 System.out.println(item);
             }
@@ -214,7 +215,7 @@ public class Test {
     private static void testGetDonNhapHangByFruitType(){
         try{
             DAODonNhapHang daoDonNhapHang = new DAODonNhapHangImpl();
-            ObservableList<Donnhaphang> list = daoDonNhapHang.getDonNhapHangByFruitType("CA1");
+            List<Donnhaphang> list = daoDonNhapHang.getDonNhapHangByFruitType("CA1");
             for (Donnhaphang d : list){
                 System.out.println(d);
             }
@@ -229,7 +230,7 @@ public class Test {
     private static void testGetDonNhapHangByTaiKhoan(){
         try{
             DAODonNhapHang daoDonNhapHang = new DAODonNhapHangImpl();
-            ObservableList<Donnhaphang> list = daoDonNhapHang.getDonNhapHangByTaiKhoan("TK-00000004");
+            List<Donnhaphang> list = daoDonNhapHang.getDonNhapHangByTaiKhoan("TK-00000004");
             for (Donnhaphang d : list){
                 System.out.println(d);
             }

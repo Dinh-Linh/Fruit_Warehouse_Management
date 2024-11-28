@@ -13,6 +13,7 @@ import javafx.collections.ObservableList;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class DAODonNhapHangImpl extends UnicastRemoteObject implements DAODonNhapHang {
@@ -29,14 +30,14 @@ public class DAODonNhapHangImpl extends UnicastRemoteObject implements DAODonNha
 
     //Lấy toàn bộ ds đơn nhập
     @Override
-    public ObservableList<Donnhaphang> getAllDonnhaphang() throws RemoteException {
+    public List<Donnhaphang> getAllDonnhaphang() throws RemoteException {
         this.entityManager = connectionStatic.getConnection();
         EntityTransaction transaction = entityManager.getTransaction();
         try{
             transaction.begin();
             TypedQuery<Donnhaphang> query = entityManager.createQuery("select s from Donnhaphang s order by s.ngayTaoDon desc, s.tinhTrang desc", Donnhaphang.class);
             transaction.commit();
-            return FXCollections.observableArrayList(query.getResultList());
+            return query.getResultList();
         } catch (Exception e){
             if(transaction.isActive()){
                 transaction.rollback();
@@ -74,7 +75,7 @@ public class DAODonNhapHangImpl extends UnicastRemoteObject implements DAODonNha
 
     //Lấy các đơn nhập hàng theo loại trái cây
     @Override
-    public ObservableList<Donnhaphang> getDonNhapHangByFruitType(String maLoaiTC) throws RemoteException {
+    public List<Donnhaphang> getDonNhapHangByFruitType(String maLoaiTC) throws RemoteException {
         this.entityManager = connectionStatic.getConnection();
         EntityTransaction transaction = entityManager.getTransaction();
         try{
@@ -82,7 +83,7 @@ public class DAODonNhapHangImpl extends UnicastRemoteObject implements DAODonNha
             TypedQuery<Donnhaphang> query = entityManager.createQuery("select s from Donnhaphang s join s.chiTietDonNhapSet d join d.traiCay_DonNhapHang f where f.loaiTraiCay_TraiCay.maloaiTc = ?1 order by s.ngayTaoDon desc, s.tinhTrang desc ", Donnhaphang.class);
             query.setParameter(1, maLoaiTC);
             transaction.commit();
-            return FXCollections.observableArrayList(query.getResultList());
+            return query.getResultList();
         } catch (Exception e){
             if(transaction.isActive()){
                 transaction.rollback();
@@ -94,7 +95,7 @@ public class DAODonNhapHangImpl extends UnicastRemoteObject implements DAODonNha
         return null;
     }
     @Override
-    public ObservableList<Donnhaphang> getDonNhapHangByTaiKhoan(String idTaiKhoan) throws RemoteException {
+    public List<Donnhaphang> getDonNhapHangByTaiKhoan(String idTaiKhoan) throws RemoteException {
         this.entityManager = connectionStatic.getConnection();
         EntityTransaction transaction = entityManager.getTransaction();
 
@@ -110,7 +111,7 @@ public class DAODonNhapHangImpl extends UnicastRemoteObject implements DAODonNha
             transaction.commit();
 
             // Trả về danh sách dưới dạng ObservableList
-            return FXCollections.observableArrayList(query.getResultList());
+            return query.getResultList();
 
         } catch (Exception e) {
             if (transaction.isActive()) {

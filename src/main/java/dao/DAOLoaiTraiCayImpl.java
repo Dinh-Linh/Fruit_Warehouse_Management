@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.List;
 
 public class DAOLoaiTraiCayImpl extends UnicastRemoteObject implements DAOLoaiTraiCay {
     //Properties
@@ -25,14 +26,14 @@ public class DAOLoaiTraiCayImpl extends UnicastRemoteObject implements DAOLoaiTr
 
     //Hàm trả về danh sách toàn bộ loại trái cây
     @Override
-    public ObservableList<Loaitraicay> getLoaiTraiCayList() throws RemoteException {
+    public List<Loaitraicay> getLoaiTraiCayList() throws RemoteException {
         this.entityManager = connectionStatic.getConnection();
         EntityTransaction transaction = entityManager.getTransaction();
         try{
             transaction.begin();
             TypedQuery<Loaitraicay> query = entityManager.createQuery("from Loaitraicay", Loaitraicay.class);
             transaction.commit();
-            return FXCollections.observableArrayList(query.getResultList());
+            return query.getResultList();
         } catch (Exception e){
             if(transaction.isActive()){
                 transaction.rollback();
