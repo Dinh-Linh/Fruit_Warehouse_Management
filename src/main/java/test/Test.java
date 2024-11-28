@@ -36,7 +36,7 @@ public class Test {
     private static void testGetAllTaikhoan(){
         try{
             DAOTaiKhoan daoTaiKhoan = new DAOTaiKhoanImpl();
-            List<Taikhoan> list = daoTaiKhoan.getAllTaiKhoan();
+            ObservableList<Taikhoan> list = daoTaiKhoan.getAllTaiKhoan();
             for(Taikhoan taikhoan : list){
                 System.out.println(taikhoan);
             }
@@ -51,8 +51,8 @@ public class Test {
     private static void testLoGin(){
         try{
             DAOTaiKhoan daoTaiKhoan = new DAOTaiKhoanImpl();
-            boolean login = daoTaiKhoan.login("nhanvien002","@Aabcd1234569");
-            if (login){
+            Taikhoan tk = daoTaiKhoan.login("nhanvien002","21hjkddf@A12234");
+            if (tk != null && tk.getLoginAttempt()==0){
                 System.out.println("Đăng nhập thành công");
             }else {
                 System.out.println("Đăng nhập thất bại");
@@ -67,7 +67,7 @@ public class Test {
     private static void testLogout(){
         try{
             DAOTaiKhoan daoTaiKhoan = new DAOTaiKhoanImpl();
-            boolean logout = daoTaiKhoan.logout("administrator");
+            boolean logout = daoTaiKhoan.logout("nhanvien002");
             if (logout){
                 System.out.println("Đăng xuất thành công");
             }else {
@@ -84,7 +84,7 @@ public class Test {
     private static void testChangePW(){
         try{
             DAOTaiKhoan daoTaiKhoan = new DAOTaiKhoanImpl();
-            boolean newpw = daoTaiKhoan.changePassword("nhanvien002","21hjkddf@A");
+            boolean newpw = daoTaiKhoan.changePassword("nhanvien002","21hjkddf@A12234");
             if (newpw){
                 System.out.println("Đổi mật khẩu thành công");
             }else {
@@ -264,15 +264,6 @@ public class Test {
         }
     }
 
-    private static Taikhoan testGetTk(String username){
-        try {
-            DAOTaiKhoan daoTaiKhoan = new DAOTaiKhoanImpl();
-            return daoTaiKhoan.getTaiKhoan(username);
-        } catch (RemoteException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public static void main(String[] args) {
 //        testGetAllDonnhaphang();
 //        testGetLoaiTraiCayList();
@@ -283,10 +274,9 @@ public class Test {
 //        testGetAllTaikhoan();
 //        testGetDonNhapHangByTaiKhoan();
 //        testGetAfterReceivedRatioByFruitType();
-//       testLoGin();
-        testLogout();
-//        testChangePW();
-        //System.out.println(testGetTk("administrator"));
+      testLoGin();
+  //     testLogout();
+  //      testChangePW();
         System.exit(0);
     }
 }
