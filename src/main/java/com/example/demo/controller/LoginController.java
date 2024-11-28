@@ -5,6 +5,7 @@ import com.example.demo.entity.UserSession;
 import com.example.demo.utils.CurrentAccount;
 import com.example.demo.utils.ShowAlert;
 import com.example.demo.utils.Validator;
+import entity.STATUS;
 import entity.Taikhoan;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,6 +23,7 @@ import java.rmi.RemoteException;
 public class LoginController {
     static Validator validator = new Validator();
     private RegistryClass registryClass;
+
     {
         try {
             registryClass = new RegistryClass();
@@ -31,6 +33,7 @@ public class LoginController {
             throw new RuntimeException(e);
         }
     }
+
     private Taikhoan currentAccount;
 
     @FXML
@@ -48,17 +51,43 @@ public class LoginController {
             //Check username và password đúng định dạng
             if (validator.checkUsername(tenDangNhap) && validator.checkPassword(matKhau)) {
                 try {
-                    Boolean login = registryClass.taiKhoan().login(tenDangNhap, matKhau);
-                    if (login) {
-                        currentAccount = registryClass.taiKhoan().getTaiKhoan(tenDangNhap);
-                        UserSession.setCurrentAccount(currentAccount);
-                        if ("administrator".equals(tenDangNhap)) {
-                            navigateToMainScreen("TrangChu.fxml", currentAccount);
+                    Taikhoan login = registryClass.taiKhoan().login(tenDangNhap, matKhau);
+                    System.out.println(login);
+
+                    if (login != null) {
+                        if (!matKhau.equals(login.getPassword())) {
+                            if (login.getStatus() == STATUS.OFF && login.getLoginAttempt() != 0) {
+                                new ShowAlert().showAlert("Thông báo", "Bạn đã nhập sai mật khẩu. Vui lòng kiểm tra lại");
+                            }
                         } else {
-                            navigateToMainScreen("TrangChuNV.fxml", currentAccount);
+                            currentAccount = registryClass.taiKhoan().getTaiKhoan(tenDangNhap);
+                            UserSession.setCurrentAccount(currentAccount);
+                            switch (login.getStatus()) {
+                                case OFF -> {
+                                    if ("administrator".equals(tenDangNhap)) {
+                                        navigateToMainScreen("TrangChu.fxml", currentAccount);
+                                    } else {
+                                        if (login.getStatus() == STATUS.FIRST) {
+                                            navigateToMainScreen("DoiMKNV.fxml", currentAccount);
+                                        } else {
+                                            navigateToMainScreen("TrangChuNV.fxml", currentAccount);
+                                        }
+                                    }
+                                }
+                                case ON -> {
+                                    new ShowAlert().showAlert("Thông báo", "Tài khoản đang đăng nhập ở nơi khác");
+                                    System.out.println(login);
+                                }
+                                case QUIT -> {
+                                    new ShowAlert().showAlert("Thông báo", "Bạn đã nghỉ việc. Không thể đăng nhập");
+                                }
+                                case LOCK -> {
+                                    new ShowAlert().showAlert("Thông báo", "Tài khoản của bạn đang bị khoá. Mở sau " + login.getLockTime() + "...");
+                                }
+                            }
                         }
                     } else {
-                        new ShowAlert().showAlert("Thông báo", "Tên đăng nhập hoặc mật khẩu không chính xác");
+                        new ShowAlert().showAlert("Thông báo", "Tài khoản không tồn tại");
                         System.out.println(login);
                     }
                 } catch (RemoteException e) {

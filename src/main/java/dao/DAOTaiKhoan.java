@@ -15,7 +15,7 @@ public interface DAOTaiKhoan extends Remote {
     //Lấy toàn bộ danh sách tài khoản;
     public List<Taikhoan> getAllTaiKhoan() throws RemoteException;
 
-    boolean login(String username, String password) throws RemoteException;
+    Taikhoan login(String username, String password) throws RemoteException;
 
     boolean logout(String username) throws RemoteException;
 
