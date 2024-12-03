@@ -116,8 +116,16 @@ public class LoginController {
                 homeAdminController.setCurrentAccount(currentAccount);
                 CurrentAccount.taikhoan = currentAccount;
             } else {
-                TrangChuNVController trangChuNVController = fxmlLoader.getController();
-                trangChuNVController.setCurrentAccount(currentAccount);
+                switch (currentAccount.getStatus()){
+                    case FIRST -> {
+                        DoiMkController doiMkController = fxmlLoader.getController();
+                        doiMkController.setCurrentAccount(currentAccount);
+                    }
+                    case OFF -> {
+                        TrangChuNVController trangChuNVController = fxmlLoader.getController();
+                        trangChuNVController.setCurrentAccount(currentAccount);
+                    }
+                }
             }
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.setScene(new Scene(mainRoot, 921, 548));

@@ -23,6 +23,15 @@ import java.util.*;
 public class TaoDonMoiController {
     Validator validator = new Validator();
 
+    private static HashMap<String, String> hashMap;
+
+    static {
+        hashMap = new HashMap<>();
+        hashMap.put("Chín", "c");
+        hashMap.put("Chưa chín", "cc");
+        hashMap.put("Sắp chín", "sc");
+    }
+
     private RegistryClass registryClass;
 
     {
@@ -116,7 +125,7 @@ public class TaoDonMoiController {
 
         //Set value Fruit Field for ComboBox
         comboBoxSize.getItems().addAll("S", "M", "L", "XL", "XXL");
-        comboBoxFruitType.getItems().addAll("Xoài Cát Chu","Loại 1", "Loại 2", "Loại 3");
+        comboBoxFruitType.getItems().addAll("Xoài Cát Chu", "Loại 1", "Loại 2", "Loại 3");
         comboBoxTinhTrang.getItems().addAll("Chín", "Chưa chín", "Sắp chín");
         importDate.setText(new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date()));
 
@@ -280,7 +289,7 @@ public class TaoDonMoiController {
         }
 //        String maTC = maTCGenerator.getMaTC(tableDonNhap.getItems().get(1));
         String tenTC = fruitName.getText();
-        String tinhTrang = comboBoxTinhTrang.getValue();
+        String tinhTrang = hashMap.get(comboBoxTinhTrang.getValue());
         String loaiTc = comboBoxFruitType.getValue();
         String kichThuoc = comboBoxSize.getValue();
         String xuatXu = fruitOrigin.getText();
