@@ -22,8 +22,9 @@
     -fx-background-color: linear-gradient(from 0% 0% to 0% 90%, #449D6B 0%, #633364 90%);
     -fx-text-fill: red;
 }
+
 .dangxuat_btn{
-    -fx-background-color: #633364;
+    -fx-background-color: #e3d193;
     -fx-text-fill: #449D6B;
 }
 .dangxuat_btn:hover{
