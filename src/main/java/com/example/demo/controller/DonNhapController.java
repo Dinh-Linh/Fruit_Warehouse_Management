@@ -1,12 +1,15 @@
 package com.example.demo.controller;
 
 import com.example.demo.entity.DSDonNhap;
+import com.example.demo.entity.UserSession;
+import com.example.demo.utils.CurrentAccount;
 import dao.DAODonNhapHang;
 import entity.Chitietdonnhap;
 import entity.Donnhaphang;
 import entity.Loaitraicay;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -24,6 +27,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public class DonNhapController {
 
@@ -49,6 +53,8 @@ public class DonNhapController {
     private Label truocKhiNhap;
     @FXML
     private Label sauKhiNhap;
+    @FXML
+    private Button dangXuat;
     private RegistryClass registryClass;
     {
         try {
@@ -79,8 +85,14 @@ public class DonNhapController {
                 updateWarehouseStatus(selectedLoai);
             }
         });
+        dangXuat.setOnAction(click ->{
+            try {
+                handleLogout(click);
+            } catch (RemoteException e) {
+                throw new RuntimeException(e);
+            }
+        });
 
-//        tableDSDonNhap.setItems(data);
         setUpTableCol();
         setUpComboBox();
         loadDonNhapData();
@@ -204,13 +216,41 @@ public class DonNhapController {
             }
             float beforeRatio = registryClass.viTri().getBeforeReceivedRatioByFruitType(maLoaiTc);
             float afterRatio = registryClass.viTri().getAfterReceivedRatioByFruitType(maLoaiTc);
-            System.out.println(beforeRatio + " " + afterRatio);
-            truocKhiNhap.setText(String.format("Kho hàng còn %.2f%% không gian", beforeRatio));
-            sauKhiNhap.setText(String.format("Kho hàng còn %.2f%% không gian", afterRatio));
-            setLabelColor(truocKhiNhap, beforeRatio);
-            setLabelColor(sauKhiNhap, afterRatio);
+            // Kiểm tra NaN và gán mặc định 100 nếu cần
+            if (Float.isNaN(beforeRatio) || Float.isNaN(afterRatio)) {
+                truocKhiNhap.setText(String.format("Kho hàng còn %.2f%% không gian", 100.00));
+                sauKhiNhap.setText(String.format("Kho hàng còn %.2f%% không gian", 100.00));
+                setLabelColor(truocKhiNhap, 100);
+                setLabelColor(sauKhiNhap, 100);
+            }
+            else {
+                System.out.println(beforeRatio + " " + afterRatio);
+                truocKhiNhap.setText(String.format("Kho hàng còn %.2f%% không gian", beforeRatio));
+                sauKhiNhap.setText(String.format("Kho hàng còn %.2f%% không gian", afterRatio - beforeRatio));
+                setLabelColor(truocKhiNhap, beforeRatio);
+                setLabelColor(sauKhiNhap, afterRatio - beforeRatio);
+            }
+
         }catch (Exception e){
             e.printStackTrace();
+        }
+    }
+
+    public void handleLogout(ActionEvent event) throws RemoteException {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Xác nhận đăng xuất");
+        alert.setHeaderText("Bạn có chắc chắn muốn đăng xuất");
+        Optional<ButtonType> results = alert.showAndWait();
+        if (CurrentAccount.taikhoan != null) {
+            System.out.println(CurrentAccount.taikhoan);
+            if (results.isPresent() && results.get() == ButtonType.OK) {
+                System.out.println("Đăng xuất thành công");
+                registryClass.taiKhoan().logout(CurrentAccount.taikhoan.getUsername());
+                UserSession.setCurrentAccount(null);
+                loadScene("FormDangNhap.fxml");
+            } else {
+                System.out.println("Huỷ đăng xuất");
+            }
         }
     }
 
