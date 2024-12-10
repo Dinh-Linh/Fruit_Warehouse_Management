@@ -62,10 +62,8 @@ public class LoginController {
                                 new ShowAlert().showAlert("Thông báo", "Bạn đã nhập sai mật khẩu. Vui lòng kiểm tra lại");
                             }
                         } else {
-
                             /*FIX 28/11/2024*/
 //                            currentAccount = registryClass.taiKhoan().getTaiKhoan(tenDangNhap);
-
                             switch (login.getStatus()) {
                                 case OFF -> {
                                     if ("administrator".equals(tenDangNhap)) {
@@ -73,16 +71,15 @@ public class LoginController {
                                         UserSession.setCurrentAccount(currentAccount);
                                         navigateToMainScreen("TrangChu.fxml", currentAccount);
                                     } else {
-                                        if (login.getStatus() == STATUS.FIRST) {
-                                            currentAccount = registryClass.taiKhoan().login(tenDangNhap, matKhau);
-                                            UserSession.setCurrentAccount(currentAccount);
-                                            navigateToMainScreen("DoiMKNV.fxml", currentAccount);
-                                        } else {
-                                            currentAccount = registryClass.taiKhoan().login(tenDangNhap, matKhau);
-                                            UserSession.setCurrentAccount(currentAccount);
-                                            navigateToMainScreen("TrangChuNV.fxml", currentAccount);
-                                        }
+                                        currentAccount = registryClass.taiKhoan().login(tenDangNhap, matKhau);
+                                        UserSession.setCurrentAccount(currentAccount);
+                                        navigateToMainScreen("TrangChuNV.fxml", currentAccount);
                                     }
+                                }
+                                case FIRST -> {
+                                    currentAccount = registryClass.taiKhoan().login(tenDangNhap, matKhau);
+                                    UserSession.setCurrentAccount(currentAccount);
+                                    navigateToMainScreen("DoiMKNV.fxml", currentAccount);
                                 }
                                 case ON -> {
                                     new ShowAlert().showAlert("Thông báo", "Tài khoản đang đăng nhập ở nơi khác");
@@ -115,25 +112,31 @@ public class LoginController {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo/" + xmlFile));
             Parent mainRoot = fxmlLoader.load();
             //Get controller của Home
-            if (currentAccount.getUsername().equals("administrator")) {
-                HomeAdminController homeAdminController = fxmlLoader.getController();
-                homeAdminController.setCurrentAccount(currentAccount);
+//            if (currentAccount.getUsername().equals("administrator")) {
+//                HomeAdminController homeAdminController = fxmlLoader.getController();
+//                homeAdminController.setCurrentAccount(currentAccount);
+//                CurrentAccount.taikhoan = currentAccount;
+//            } else {
+//                TrangChuNVController trangChuNVController = fxmlLoader.getController();
+//                trangChuNVController.setCurrentAccount(currentAccount);
+//                CurrentAccount.taikhoan = currentAccount;
+//            }
+
+            // Get controller dựa trên màn hình hiện tại
+            if ("DoiMKNV.fxml".equals(xmlFile)) {
+                // Đổi mật khẩu
+                DoiMkController doiMkController = fxmlLoader.getController();
+                doiMkController.setCurrentAccount(currentAccount);
                 CurrentAccount.taikhoan = currentAccount;
-            } else {
-//                switch (currentAccount.getStatus()){
-//                    case FIRST -> {
-//                        DoiMkController doiMkController = fxmlLoader.getController();
-//                        doiMkController.setCurrentAccount(currentAccount);
-//                        CurrentAccount.taikhoan = currentAccount;
-//                    }
-//                    case OFF -> {
-//                        TrangChuNVController trangChuNVController = fxmlLoader.getController();
-//                        trangChuNVController.setCurrentAccount(currentAccount);
-//                        CurrentAccount.taikhoan = currentAccount;
-//                    }
-//                }
+            } else if ("TrangChuNV.fxml".equals(xmlFile)) {
+                // Trang chủ nhân viên
                 TrangChuNVController trangChuNVController = fxmlLoader.getController();
                 trangChuNVController.setCurrentAccount(currentAccount);
+                CurrentAccount.taikhoan = currentAccount;
+            } else if ("TrangChu.fxml".equals(xmlFile)) {
+                // Trang chủ admin
+                HomeAdminController homeAdminController = fxmlLoader.getController();
+                homeAdminController.setCurrentAccount(currentAccount);
                 CurrentAccount.taikhoan = currentAccount;
             }
             Stage stage = (Stage) btnLogin.getScene().getWindow();
