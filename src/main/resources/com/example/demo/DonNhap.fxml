@@ -48,6 +48,7 @@
                 </Label>
             </children>
         </AnchorPane>
+        <Button fx:id="dangXuat" layoutX="53.0" layoutY="488.0" mnemonicParsing="false" styleClass="dangxuat_btn" text="Đăng xuất"/>
         <AnchorPane id="dsdonnhap" layoutX="191.0" layoutY="19.0" prefHeight="518.0" prefWidth="706.0" style="-fx-border-radius: 10; -fx-border-color: grey;">
             <children>
                 <AnchorPane layoutX="13.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="178.0" style="-fx-border-radius: 0 10 10 0; -fx-border-color: #918E8E;" styleClass="label-tittle">

@@ -46,3 +46,11 @@
 	-fx-font-weight: bold; /* Đậm chữ */
 	-fx-alignment: center; /* Căn giữa nội dung */
 }
+
+.dangxuat_btn{
+	-fx-background-color: #e3d193;
+	-fx-text-fill: #449D6B;
+}
+.dangxuat_btn:hover{
+	-fx-text-fill: WHITE;
+}

@@ -1,9 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.TaiKhoan;
 import com.example.demo.utils.CurrentAccount;
 import entity.Taikhoan;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,6 +38,10 @@ public class TrangChuNVController {
         }
     }
 
+    public void setCurrentAccount(Taikhoan currentAccount) {
+        this.currentAccount = currentAccount;
+    }
+
     @FXML
     public void initialize(){
         doiMk.setOnMouseClicked(event -> {
@@ -54,20 +56,18 @@ public class TrangChuNVController {
         });
     }
 
-    public void setCurrentAccount(Taikhoan account) {
-        this.currentAccount = account;
-    }
     public void handleLogout(ActionEvent event) throws RemoteException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Xác nhận đăng xuất");
         alert.setHeaderText("Bạn có chắc chắn muốn đăng xuất");
         Optional<ButtonType> results = alert.showAndWait();
         if (CurrentAccount.taikhoan != null){
+            System.out.println(CurrentAccount.taikhoan);
             if (results.isPresent() && results.get() == ButtonType.OK){
                 System.out.println("Đăng xuất thành công");
                 registryClass.taiKhoan().logout(CurrentAccount.taikhoan.getUsername());
                 System.out.println(currentAccount);
-                Platform.exit();
+                loadScene("FormDangNhap.fxml");
             }
             else {
                 System.out.println("Huỷ đăng xuất");
@@ -81,6 +81,17 @@ public class TrangChuNVController {
             Parent root = fxmlLoader.load();
             DoiMkController doiMkController = fxmlLoader.getController();
             doiMkController.setCurrentAccount(account);
+            Stage stage = (Stage) labelTrangChu.getScene().getWindow();
+            stage.setScene(new Scene(root, 921, 548));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void loadScene(String fxmlFile) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo/" + fxmlFile));
+            Parent root = fxmlLoader.load();
             Stage stage = (Stage) labelTrangChu.getScene().getWindow();
             stage.setScene(new Scene(root, 921, 548));
         } catch (IOException e) {

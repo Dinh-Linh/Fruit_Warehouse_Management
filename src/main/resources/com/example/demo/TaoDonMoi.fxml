@@ -47,7 +47,9 @@
                </font>
             </Label>
          </children>
+
       </AnchorPane>
+      <Button fx:id="dangXuat" layoutX="53.0" layoutY="488.0" mnemonicParsing="false" styleClass="dangxuat_btn" text="Đăng xuất" />
       <AnchorPane id="trangchu" layoutX="191.0" layoutY="19.0" prefHeight="518.0" prefWidth="714.0" style="-fx-border-radius: 10; -fx-border-color: grey;">
          <children>
             <AnchorPane fx:id="newOrder" layoutX="13.0" layoutY="14.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="31.0" prefWidth="110.0" style="-fx-border-radius: 0 10 10 0; -fx-border-color: #918E8E;" styleClass="label-tittle">
@@ -150,10 +152,9 @@
                   <TableView fx:id="tableDonNhap" layoutX="14.0" layoutY="72.0" prefHeight="200.0" prefWidth="346.0">
                      <columns>
                         <TableColumn fx:id="soTT" prefWidth="29.60003662109375" text="STT" />
-                        <TableColumn fx:id="clMaTc" prefWidth="93.0" text="Mã TC" />
-                        <TableColumn fx:id="clTenTc" prefWidth="94.0" text="Tên trái cây" />
-                        <TableColumn fx:id="clKichThuocTc" minWidth="0.0" prefWidth="43.0" text="Size" />
-                        <TableColumn fx:id="clTinhTrangTc" prefWidth="101.0" text="Tình trạng" />
+                        <TableColumn fx:id="clTenTc" prefWidth="148.0" text="Tên trái cây" />
+                        <TableColumn fx:id="clKichThuocTc" minWidth="0.0" prefWidth="57.0" text="Size" />
+                        <TableColumn fx:id="clTinhTrangTc" prefWidth="110.0" text="Tình trạng" />
                      </columns>
                   </TableView>
                   <Label layoutX="14.0" layoutY="295.0" text="Nhà cung cấp :">

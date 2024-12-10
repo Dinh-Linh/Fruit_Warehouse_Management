@@ -29,6 +29,7 @@ public class HomeAdminController {
     @FXML
     private Button dangXuat;
     private RegistryClass registryClass;
+
     {
         try {
             registryClass = new RegistryClass();
@@ -38,6 +39,7 @@ public class HomeAdminController {
             throw new RuntimeException(e);
         }
     }
+
     private Taikhoan currentAccount;
 
     public void setCurrentAccount(Taikhoan currentAccount) {
@@ -58,26 +60,27 @@ public class HomeAdminController {
             }
         });
     }
+
     public void handleLogout(ActionEvent event) throws RemoteException {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Xác nhận đăng xuất");
         alert.setHeaderText("Bạn có chắc chắn muốn đăng xuất");
         Optional<ButtonType> results = alert.showAndWait();
-        if (CurrentAccount.taikhoan != null){
-            if (results.isPresent() && results.get() == ButtonType.OK){
+        if (CurrentAccount.taikhoan != null) {
+            System.out.println(CurrentAccount.taikhoan);
+            if (results.isPresent() && results.get() == ButtonType.OK) {
                 System.out.println("Đăng xuất thành công");
                 registryClass.taiKhoan().logout(CurrentAccount.taikhoan.getUsername());
                 UserSession.setCurrentAccount(null);
                 System.out.println(currentAccount);
-                Platform.exit();
-            }
-            else {
+                loadScene("FormDangNhap.fxml");
+            } else {
                 System.out.println("Huỷ đăng xuất");
             }
         }
     }
 
-    private void loadScene(String fxmlFile) {
+    public void loadScene(String fxmlFile) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/demo/" + fxmlFile));
             Parent root = fxmlLoader.load();

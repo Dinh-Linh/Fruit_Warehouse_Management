@@ -28,3 +28,11 @@
 .quaylaibutton{
     -fx-background-color: #449D6B;
 }
+
+.dangxuat_btn{
+    -fx-background-color: #e3d193;
+    -fx-text-fill: #449D6B;
+}
+.dangxuat_btn:hover{
+    -fx-text-fill: WHITE;
+}

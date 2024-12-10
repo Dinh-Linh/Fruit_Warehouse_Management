@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import com.example.demo.entity.TaiKhoan;
 import com.example.demo.entity.UserSession;
 import com.example.demo.utils.CurrentAccount;
 import com.example.demo.utils.ShowAlert;
@@ -53,29 +52,34 @@ public class LoginController {
                 try {
                     /*FIX 28/11/2024*/
 //                    Taikhoan login = registryClass.taiKhoan().login(tenDangNhap, matKhau);
-                    
+
                     Taikhoan login = registryClass.taiKhoan().getTaiKhoan(tenDangNhap);
                     System.out.println(login);
 
                     if (login != null) {
                         if (!matKhau.equals(login.getPassword())) {
-                            if (login.getStatus() == STATUS.OFF && login.getLoginAttempt() != 0) {
+                            if (login.getStatus() == STATUS.OFF) {
                                 new ShowAlert().showAlert("Thông báo", "Bạn đã nhập sai mật khẩu. Vui lòng kiểm tra lại");
                             }
                         } else {
 
                             /*FIX 28/11/2024*/
 //                            currentAccount = registryClass.taiKhoan().getTaiKhoan(tenDangNhap);
-                            currentAccount = registryClass.taiKhoan().login(tenDangNhap, matKhau);
-                            UserSession.setCurrentAccount(currentAccount);
+
                             switch (login.getStatus()) {
                                 case OFF -> {
                                     if ("administrator".equals(tenDangNhap)) {
+                                        currentAccount = registryClass.taiKhoan().login(tenDangNhap, matKhau);
+                                        UserSession.setCurrentAccount(currentAccount);
                                         navigateToMainScreen("TrangChu.fxml", currentAccount);
                                     } else {
                                         if (login.getStatus() == STATUS.FIRST) {
+                                            currentAccount = registryClass.taiKhoan().login(tenDangNhap, matKhau);
+                                            UserSession.setCurrentAccount(currentAccount);
                                             navigateToMainScreen("DoiMKNV.fxml", currentAccount);
                                         } else {
+                                            currentAccount = registryClass.taiKhoan().login(tenDangNhap, matKhau);
+                                            UserSession.setCurrentAccount(currentAccount);
                                             navigateToMainScreen("TrangChuNV.fxml", currentAccount);
                                         }
                                     }
@@ -116,16 +120,21 @@ public class LoginController {
                 homeAdminController.setCurrentAccount(currentAccount);
                 CurrentAccount.taikhoan = currentAccount;
             } else {
-                switch (currentAccount.getStatus()){
-                    case FIRST -> {
-                        DoiMkController doiMkController = fxmlLoader.getController();
-                        doiMkController.setCurrentAccount(currentAccount);
-                    }
-                    case OFF -> {
-                        TrangChuNVController trangChuNVController = fxmlLoader.getController();
-                        trangChuNVController.setCurrentAccount(currentAccount);
-                    }
-                }
+//                switch (currentAccount.getStatus()){
+//                    case FIRST -> {
+//                        DoiMkController doiMkController = fxmlLoader.getController();
+//                        doiMkController.setCurrentAccount(currentAccount);
+//                        CurrentAccount.taikhoan = currentAccount;
+//                    }
+//                    case OFF -> {
+//                        TrangChuNVController trangChuNVController = fxmlLoader.getController();
+//                        trangChuNVController.setCurrentAccount(currentAccount);
+//                        CurrentAccount.taikhoan = currentAccount;
+//                    }
+//                }
+                TrangChuNVController trangChuNVController = fxmlLoader.getController();
+                trangChuNVController.setCurrentAccount(currentAccount);
+                CurrentAccount.taikhoan = currentAccount;
             }
             Stage stage = (Stage) btnLogin.getScene().getWindow();
             stage.setScene(new Scene(mainRoot, 921, 548));

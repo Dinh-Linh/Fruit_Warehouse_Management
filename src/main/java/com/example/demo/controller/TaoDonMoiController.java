@@ -159,7 +159,7 @@ public class TaoDonMoiController {
         });
 
         // Set value of other columns
-        clMaTc.setCellValueFactory(new PropertyValueFactory<>("maTc"));
+        //clMaTc.setCellValueFactory(new PropertyValueFactory<>("maTc"));
         clTenTc.setCellValueFactory(new PropertyValueFactory<>("tenTc"));
         clKichThuocTc.setCellValueFactory(new PropertyValueFactory<>("size"));
         clTinhTrangTc.setCellValueFactory(new PropertyValueFactory<>("tinhTrang"));
