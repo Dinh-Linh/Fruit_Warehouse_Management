@@ -60,6 +60,7 @@ public class LoginController {
                         if (!matKhau.equals(login.getPassword())) {
                             if (login.getStatus() == STATUS.OFF) {
                                 new ShowAlert().showAlert("Thông báo", "Bạn đã nhập sai mật khẩu. Vui lòng kiểm tra lại");
+                                registryClass.taiKhoan().login(tenDangNhap, matKhau);
                             }
                         } else {
                             /*FIX 28/11/2024*/
