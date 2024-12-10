@@ -108,6 +108,7 @@ public class DoiMkController {
                 if (isSuccess) {
                     System.out.println("Đổi mật khẩu thành công");
                     new ShowAlert().showAlert("Thông báo", "Đối mật khẩu thành công");
+                    loadScene("TrangChuNV.fxml");
                 } else {
                     new ShowAlert().showAlert("Thông báo", "Đổi mật khẩu thất bại");
                 }
