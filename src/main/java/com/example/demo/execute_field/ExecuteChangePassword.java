@@ -24,20 +24,4 @@ public class ExecuteChangePassword {
             }
         }
     }
-
-    public void executeButton(String newPassword, String reTypeNewPassword){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("Thông báo");
-        alert.setHeaderText("Xác nhận đổi mật khẩu");
-        Optional<ButtonType> results = alert.showAndWait();
-        if (checkPasswordTrue(newPassword, reTypeNewPassword)){
-            if (results.isPresent() && results.get() == ButtonType.OK){
-                System.out.println("Đổi mật khẩu thành công");
-                new ShowAlert().showAlert("Thông báo", "Đối mật khẩu thành công");
-            }
-            else {
-                alert.close();
-            }
-        }
-    }
 }
