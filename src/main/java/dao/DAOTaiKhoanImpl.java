@@ -12,6 +12,9 @@ import javafx.collections.ObservableList;
 import java.sql.Date;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class DAOTaiKhoanImpl extends UnicastRemoteObject implements DAOTaiKhoan {
@@ -101,10 +104,25 @@ public class DAOTaiKhoanImpl extends UnicastRemoteObject implements DAOTaiKhoan 
             // Đã đúng tên tài khoản
             // Kiểm tra mật khẩu
 
-            checkAndUpdateAccountStatus(taikhoan);
+//            checkAndUpdateAccountStatus(taikhoan);
+
+            //entityManager quản lý tài khoản
+            taikhoan = entityManager.find(Taikhoan.class, taikhoan.getIdTaiKhoan());
+
+            /*FIX 15/12 */
+            //Nếu tài khoản hết thời gian bị khóa thì cập nhật lại
+            if (taikhoan.getStatus() == STATUS.LOCK && taikhoan.getLockTime() != null) {
+                if (Timestamp.from(Instant.now()).after(taikhoan.getLockTime())) {
+                    // Đã quá thời gian khóa, cập nhật trạng thái về OFF và reset loginAttempt
+                    taikhoan.setStatus(STATUS.OFF);
+                    taikhoan.setLoginAttempt(0); // Reset loginAttempt về 5
+                }
+            }
+
             if (taikhoan.getPassword().equals(password)) {
                 // Kiểm tra trạng thái
                 if (taikhoan.getStatus() == STATUS.LOCK || taikhoan.getStatus() == STATUS.QUIT ||taikhoan.getStatus() == STATUS.ON) {
+                    transaction.commit();
                     return taikhoan;
                 }
                 // Đăng nhập thành công nếu trạng thái là "OFF" hoặc "FIRST"
@@ -112,7 +130,9 @@ public class DAOTaiKhoanImpl extends UnicastRemoteObject implements DAOTaiKhoan 
                     // Reset loginAttempt về 0 khi đăng nhập thành công
                     taikhoan.setLoginAttempt(0);
                     taikhoan.setStatus(STATUS.ON);
-                    entityManager.merge(taikhoan);
+
+//                    entityManager.merge(taikhoan);
+                    System.out.println(entityManager.contains(taikhoan));
                     transaction.commit();
                     return taikhoan;
                 }
@@ -122,7 +142,7 @@ public class DAOTaiKhoanImpl extends UnicastRemoteObject implements DAOTaiKhoan 
                 if (taikhoan.getLoginAttempt() > 5) {
                     // Nếu loginAttempt > 5, khóa tài khoản
                     taikhoan.setStatus(STATUS.LOCK);
-                    taikhoan.setLockTime(new Date(System.currentTimeMillis() + 30 * 60 * 1000)); // Khóa tài khoản trong 30 phút
+                    taikhoan.setLockTime(Timestamp.valueOf(LocalDateTime.now().plusMinutes(30))); // Khóa tài khoản trong 30 phút
                 }
                 transaction.commit();
                 return taikhoan;
@@ -138,12 +158,13 @@ public class DAOTaiKhoanImpl extends UnicastRemoteObject implements DAOTaiKhoan 
         return null;
     }
 
+    //Không dùng được do entityManager không quản lý
     // Phương thức kiểm tra và cập nhật trạng thái tài khoản
     public void checkAndUpdateAccountStatus(Taikhoan taikhoan) {
-        Date now = new Date(System.currentTimeMillis());
+        /*FIX 15/12 sửa LockTime sang TimeStamp */
         // Kiểm tra nếu lockTime đã qua
         if (taikhoan.getStatus() == STATUS.LOCK && taikhoan.getLockTime() != null) {
-            if (now.after(taikhoan.getLockTime())) {
+            if (Timestamp.valueOf(String.valueOf(Instant.now())).after(taikhoan.getLockTime())) {
                 // Đã quá thời gian khóa, cập nhật trạng thái về OFF và reset loginAttempt
                 taikhoan.setStatus(STATUS.OFF);
                 taikhoan.setLoginAttempt(5); // Reset loginAttempt về 5
@@ -216,6 +237,41 @@ public class DAOTaiKhoanImpl extends UnicastRemoteObject implements DAOTaiKhoan 
         } finally {
             entityManager.close();
         }
+        return false;
+    }
+
+    //Kiểm tra mã khôi phục
+    @Override
+    public boolean checkRecoverCode(String recoverCode) throws RemoteException {
+        this.entityManager = connectionStatic.getConnection();
+        EntityTransaction transaction = entityManager.getTransaction();
+        try{
+            transaction.begin();
+            //Lấy tài khoản admin
+            Taikhoan tkAd =  entityManager.find(Taikhoan.class, "TK-00000000");
+
+            //Không có return false
+            if(tkAd == null){
+                transaction.commit();
+                return false;
+            }
+
+            if(tkAd.getRecoveryCode().equals(recoverCode)) {
+                tkAd.setLoginAttempt(0);
+                tkAd.setStatus(STATUS.ON);
+                transaction.commit();
+                return true;
+            }
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction.isActive()) {
+                transaction.rollback();
+            }
+        } finally {
+            if(this.entityManager.isOpen())
+                this.entityManager.close();
+        }
+
         return false;
     }
 

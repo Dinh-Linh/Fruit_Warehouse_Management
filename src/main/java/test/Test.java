@@ -11,7 +11,10 @@ import javafx.collections.ObservableList;
 import java.math.BigDecimal;
 import java.rmi.RemoteException;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -274,9 +277,10 @@ public class Test {
 //        testGetAllTaikhoan();
 //        testGetDonNhapHangByTaiKhoan();
 //        testGetAfterReceivedRatioByFruitType();
-      testLoGin();
+//      testLoGin();
    //    testLogout();
   //      testChangePW();
+        System.out.println(Timestamp.valueOf(LocalDateTime.now().plusMinutes(30)));
         System.exit(0);
     }
 }

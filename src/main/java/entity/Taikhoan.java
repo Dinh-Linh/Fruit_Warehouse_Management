@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 @Getter
@@ -41,9 +42,10 @@ public class Taikhoan implements Serializable {
     @Column(name = "Status")
     private STATUS status;
 
+    /*FIX 15/12 */
     @Basic
     @Column(name = "LockTime")
-    private Date lockTime;
+    private Timestamp lockTime;
 
     @Basic
     @Column(name = "StartDate")
