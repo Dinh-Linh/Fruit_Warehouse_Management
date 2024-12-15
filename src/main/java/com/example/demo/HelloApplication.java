@@ -39,7 +39,11 @@ public class HelloApplication extends Application {
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             try {
                 Taikhoan currentAccount = UserSession.getCurrentAccount();
-                registryClass.taiKhoan().logout(currentAccount.getUsername());
+
+                /* FIX 15/12 */
+                //Có đăng nhập mới logout
+                if(currentAccount !=null)
+                    registryClass.taiKhoan().logout(currentAccount.getUsername());
             } catch (Exception e) {
                 e.printStackTrace();
             }

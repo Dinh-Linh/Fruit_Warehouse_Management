@@ -4,6 +4,7 @@ import lombok.*;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,7 +25,7 @@ public class Taikhoan implements Serializable {
 
     private STATUS status;
 
-    private Date lockTime;
+    private Timestamp lockTime;
 
     private Date startDate;
 

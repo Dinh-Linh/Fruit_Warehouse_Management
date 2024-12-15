@@ -18,6 +18,8 @@ import util.RegistryClass;
 import java.io.IOException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.sql.Timestamp;
+import java.time.Instant;
 
 public class LoginController {
     static Validator validator = new Validator();
@@ -55,8 +57,19 @@ public class LoginController {
 
                     Taikhoan login = registryClass.taiKhoan().getTaiKhoan(tenDangNhap);
                     System.out.println(login);
-
                     if (login != null) {
+
+                        /*FIX 15/12/2024*/
+                        //Nếu tài khoản hết thời gian bị khóa thì cập nhật lại (tạm thời sử dụng biến login) - chỉ với nhân viên
+                        if (login.getStatus() == STATUS.LOCK && login.getLockTime() != null && !login.getUsername().equals("administrator")) {
+                            if (Timestamp.from(Instant.now()).after(login.getLockTime())) {
+                                // Đã quá thời gian khóa, cập nhật trạng thái về OFF và reset loginAttempt
+                                login.setStatus(STATUS.OFF);
+                                System.out.println("Flag1");
+                                System.out.println(login);
+                            }
+                        }
+
                         if (!matKhau.equals(login.getPassword())) {
                             if (login.getStatus() == STATUS.OFF) {
                                 new ShowAlert().showAlert("Thông báo", "Bạn đã nhập sai mật khẩu. Vui lòng kiểm tra lại");
@@ -90,6 +103,12 @@ public class LoginController {
                                     new ShowAlert().showAlert("Thông báo", "Bạn đã nghỉ việc. Không thể đăng nhập");
                                 }
                                 case LOCK -> {
+                                    if(login.getUsername().equals("administrator")){
+                                        new ShowAlert().showAlert("Thông báo", "Nhập mã khôi phục để mở khóa tài khoản");
+                                        currentAccount = login;
+                                        navigateToMainScreen("FormMaKhoiPhuc.fxml", currentAccount);
+                                        return;
+                                    }
                                     new ShowAlert().showAlert("Thông báo", "Tài khoản của bạn đang bị khoá. Mở sau " + login.getLockTime() + "...");
                                 }
                             }
@@ -138,6 +157,11 @@ public class LoginController {
                 // Trang chủ admin
                 HomeAdminController homeAdminController = fxmlLoader.getController();
                 homeAdminController.setCurrentAccount(currentAccount);
+                CurrentAccount.taikhoan = currentAccount;
+            } else if ("FormMaKhoiPhuc.fxml".equals(xmlFile)) {
+                //Màn hình khôi phục
+                KhoiPhucController khoiPhucController = fxmlLoader.getController();
+                khoiPhucController.setCurrentAccount(currentAccount);
                 CurrentAccount.taikhoan = currentAccount;
             }
             Stage stage = (Stage) btnLogin.getScene().getWindow();

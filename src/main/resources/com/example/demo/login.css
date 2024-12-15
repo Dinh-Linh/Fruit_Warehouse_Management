@@ -12,3 +12,12 @@
 .button_xacnhan:hover {
     -fx-background-color: #5fb68c;
 }
+
+.button_huy {
+    -fx-background-color: #ec6a62; /* Màu nền mặc định */
+    -fx-text-fill: WHITE;
+    -fx-region-border: 20;
+}
+.button_huy:hover {
+    -fx-background-color: #f12418;
+}

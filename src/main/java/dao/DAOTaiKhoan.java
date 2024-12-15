@@ -20,4 +20,6 @@ public interface DAOTaiKhoan extends Remote {
     boolean logout(String username) throws RemoteException;
 
     boolean changePassword(String username, String newPassword) throws RemoteException;
+
+    public boolean checkRecoverCode(String recoverCode) throws RemoteException;
 }
