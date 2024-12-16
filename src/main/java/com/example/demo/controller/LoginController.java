@@ -70,6 +70,13 @@ public class LoginController {
                             }
                         }
 
+                        if(login.getUsername().equals("administrator") && login.getStatus().equals(STATUS.LOCK)){
+                            new ShowAlert().showAlert("Thông báo", "Nhập mã khôi phục để mở khóa tài khoản");
+                            currentAccount = login;
+                            navigateToMainScreen("FormMaKhoiPhuc.fxml", currentAccount);
+                            return;
+                        }
+
                         if (!matKhau.equals(login.getPassword())) {
                             if (login.getStatus() == STATUS.OFF) {
                                 new ShowAlert().showAlert("Thông báo", "Bạn đã nhập sai mật khẩu. Vui lòng kiểm tra lại");
@@ -103,12 +110,12 @@ public class LoginController {
                                     new ShowAlert().showAlert("Thông báo", "Bạn đã nghỉ việc. Không thể đăng nhập");
                                 }
                                 case LOCK -> {
-                                    if(login.getUsername().equals("administrator")){
-                                        new ShowAlert().showAlert("Thông báo", "Nhập mã khôi phục để mở khóa tài khoản");
-                                        currentAccount = login;
-                                        navigateToMainScreen("FormMaKhoiPhuc.fxml", currentAccount);
-                                        return;
-                                    }
+//                                    if(login.getUsername().equals("administrator")){
+//                                        new ShowAlert().showAlert("Thông báo", "Nhập mã khôi phục để mở khóa tài khoản");
+//                                        currentAccount = login;
+//                                        navigateToMainScreen("FormMaKhoiPhuc.fxml", currentAccount);
+//                                        return;
+//                                    }
                                     new ShowAlert().showAlert("Thông báo", "Tài khoản của bạn đang bị khoá. Mở sau " + login.getLockTime() + "...");
                                 }
                             }
